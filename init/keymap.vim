@@ -158,6 +158,8 @@ function s:comment()
 		let l:comment_symbol = '\/\/'
 	elseif index(["python"], &filetype) >= 0
 		let l:comment_symbol = '\#'
+	elseif index(["sh"], &filetype) >= 0
+		let l:comment_symbol = '\#'
 	else
 		return
 	endif

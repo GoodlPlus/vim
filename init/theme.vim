@@ -257,8 +257,10 @@ let s:highlight_config =
 	\ 'EndOfBuffer': 		[{'NONE': 1}, {'guifg': s:bg_0}],
 	\
 	\ 'Todo': 				[{'NONE': 1}, {'guifg': s:bg_0, 'guibg': s:fg_1}],
+	\ 'SignColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
 \ }
-	""\ 'CursorLineNr': 		[{'NONE': 1}, {'guifg': s:fg_1, 'guibg': s:bg_0}],
+	" \ 'CursorLineNr': 		[{'NONE': 1}, {'guifg': s:fg_1, 'guibg': s:bg_0}],
+	" \ 'SignColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
 	" \
 	" \ 'Search': 			[{'NONE': 1}, {'guifg': s:bg_0, 'guibg': s:fg_1}],
 	" \ 'IncSearch': 			[{'NONE': 1}, {'guifg': s:bg_0, 'guibg': s:fg_1}],

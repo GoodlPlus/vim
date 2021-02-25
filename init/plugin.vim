@@ -117,7 +117,8 @@ function s:update_plugin(plugin_name)
 		\ '-C',
 		\ l:plugin_path,
 		\ 'pull',
-		\ '--all'
+		\ 'origin',
+		\ '$(git symbolic-ref HEAD 2>/dev/null | cut -d "/" -f 3)',
 	\ ]
 	call job_start(l:cmd, s:callback)
 endfunction
@@ -159,7 +160,7 @@ command UninstallPlugin call <SID>uninstall_plugin_all()
 command UpdatePlugin call <SID>update_plugin_all()
 
 Plugin 'matchit'
-Plugin 'translator'
+
 Plugin 'https://github.com/morhetz/gruvbox'
 Plugin 'https://github.com/neoclide/coc.nvim'
 Plugin 'https://github.com/Yggdroot/LeaderF', {'cmd': 'LeaderfInstallCExtension'}
@@ -167,5 +168,7 @@ Plugin 'https://github.com/lervag/vimtex'
 Plugin 'https://github.com/honza/vim-snippets'
 Plugin 'https://github.com/vim-python/python-syntax'
 Plugin 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
+
+Plugin 'https://gitee.com/GoodlPlus/translator'
 
 call <SID>load_plugin_all()
