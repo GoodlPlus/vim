@@ -2,8 +2,8 @@
 " plugins
 " ------------------------------------------------------------------------------
 let s:config_name = fnameescape('config')
-let s:config_path = fnameescape(join([g:home_path, s:config_name], '/'))
-let s:pack_path = fnameescape(join([g:home_path, 'pack/plugin/opt'], '/'))
+let s:config_path = fnameescape(join([g:_VIM_PATH, s:config_name], '/'))
+let s:pack_path = fnameescape(join([g:_VIM_PATH, 'pack/plugin/opt'], '/'))
 let s:plugin_dict = {}
 let s:debug_mode = 1
 

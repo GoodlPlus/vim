@@ -1,9 +1,8 @@
 " ------------------------------------------------------------------------------
 " LeaderF
 " ------------------------------------------------------------------------------
-" let g:Lf_ShortcutF = '<C-p>'
-let g:Lf_WindowPosition = 'bottom'
-let g:Lf_WindowHeight = 0.2
+let g:Lf_WindowPosition = 'popup'
+" let g:Lf_WindowHeight = 0.2
 let g:Lf_DefaultMode = 'FullPath'
 let g:Lf_CursorBlink = 0
 let g:Lf_WildIgnore =
@@ -11,9 +10,10 @@ let g:Lf_WildIgnore =
 	\ 'dir': ['.svn','.git','.hg'],
 	\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
 \ }
-let g:Lf_MruMaxFiles = 999999
-let g:Lf_DisableStl = 1
-let g:Lf_StlColorscheme = 'gruvbox_material'
+let g:Lf_MruMaxFiles = 999
+" let g:Lf_DisableStl = 1
+let g:Lf_DisableStl = 0
+" let g:Lf_StlColorscheme = 'gruvbox_material'
 let g:Lf_StlSeparator = {'left': '', 'right': ''}
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_NormalMap =
@@ -45,10 +45,12 @@ let g:Lf_PreviewResult =
 \ }
 let g:Lf_HideHelp = 1
 let g:Lf_IgnoreCurrentBufferName = 1
-" let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewInPopup = 1
 " let g:Lf_PreviewHorizontalPosition = 'center'
 " let g:Lf_PreviewPopupWidth = &columns
 " let g:Lf_PopupHeight = 0.2
+let g:Lf_PopupColorscheme = 'gruvbox'
+let g:Lf_PopupShowFoldcolumn = 0
 
 " nnoremap <Leader>f <Cmd>LeaderfSelf<CR>
 nnoremap <Leader>h <Cmd>LeaderfHelp<CR>

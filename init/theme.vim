@@ -258,6 +258,7 @@ let s:highlight_config =
 	\
 	\ 'Todo': 				[{'NONE': 1}, {'guifg': s:bg_0, 'guibg': s:fg_1}],
 	\ 'SignColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
+	\ 'FoldColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
 \ }
 	" \ 'CursorLineNr': 		[{'NONE': 1}, {'guifg': s:fg_1, 'guibg': s:bg_0}],
 	" \ 'SignColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],

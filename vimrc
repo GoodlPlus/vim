@@ -18,9 +18,9 @@ let g:loaded_2html_plugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_zipPlugin = 1
 
-let g:home_path = fnameescape(expand('<sfile>:p:h'))
+let g:_VIM_PATH = fnameescape(expand('<sfile>:p:h'))
 let s:init_name = fnameescape('init')
-let s:init_path = fnameescape(join([g:home_path, s:init_name], '/'))
+let s:init_path = fnameescape(join([g:_VIM_PATH, s:init_name], '/'))
 let s:init_list =
 \ [
 	\ 'basic',
