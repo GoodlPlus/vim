@@ -169,6 +169,6 @@ Plugin 'https://github.com/honza/vim-snippets'
 Plugin 'https://github.com/vim-python/python-syntax'
 Plugin 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
 
-Plugin 'https://gitee.com/GoodlPlus/translator'
+Plugin 'translator'
 
 call <SID>load_plugin_all()
