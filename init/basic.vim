@@ -36,7 +36,7 @@ set spell
 set number
 " set relativenumber
 set signcolumn=number
-set foldcolumn=1
+" set foldcolumn=1
 " set numberwidth=5
 set scrolloff=5
 
