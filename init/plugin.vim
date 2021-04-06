@@ -3,9 +3,9 @@
 " ------------------------------------------------------------------------------
 let s:config_name = fnameescape('config')
 let s:config_path = fnameescape(join([g:_VIM_PATH, s:config_name], '/'))
-let s:pack_path = fnameescape(join([g:_VIM_PATH, 'pack/plugin/opt'], '/'))
+let s:pack_path = fnameescape(join([g:_VIM_PATH, 'pack/online/opt'], '/'))
 let s:plugin_dict = {}
-let s:debug_mode = 1
+let s:debug_mode = 0
 
 function s:plugin(repo, info = {})
 	let l:info = deepcopy(a:info)
@@ -39,18 +39,18 @@ function s:exit_cb(channel, message) abort
 	let l:job_info = job_info(a:channel)
 	for l:i in l:job_info['cmd']
 		if l:i ==# 'clone'
-			let l:type = 'Install'
+			let l:type = 'install'
 		elseif l:i ==# 'pull'
-			let l:type = 'Update'
+			let l:type = 'update'
 		endif
 		if l:i =~# s:pack_path
 			let l:plugin_name = fnamemodify(l:i, ':t')
 		endif
 	endfor
 	if l:job_info['exitval'] == 0
-		echomsg join([l:type, l:plugin_name, 'successfully'])
+		echomsg join(['Successfully:', l:type, l:plugin_name])
 	else
-		echomsg join([l:type, l:plugin_name, 'failed:', l:job_info['exitval']])
+		echomsg join(['Failed:', l:type, l:plugin_name])
 	endif
 	if s:debug_mode
 		echomsg "exit_cb: " l:job_info
@@ -70,12 +70,13 @@ function s:err_cb(channel, message) abort
 endfunction
 
 let s:callback =
-			\ {
-				\ 'exit_cb': function('<SID>exit_cb'),
-				\ 'out_cb': function('<SID>out_cb'),
-				\ 'err_cb': function('<SID>err_cb'),
-				\ 'stoponexit': '',
-				\ }
+\ {
+	\ 'mode': 'nl',
+	\ 'exit_cb': function('<SID>exit_cb'),
+	\ 'out_cb': function('<SID>out_cb'),
+	\ 'err_cb': function('<SID>err_cb'),
+	\ 'stoponexit': '',
+\ }
 
 function s:exists_plugin(plugin_name)
 	let l:plugin_path = <SID>get_plugin_path(a:plugin_name)
@@ -117,8 +118,7 @@ function s:update_plugin(plugin_name)
 		\ '-C',
 		\ l:plugin_path,
 		\ 'pull',
-		\ 'origin',
-		\ '$(git symbolic-ref HEAD 2>/dev/null | cut -d "/" -f 3)',
+		\ '--all',
 	\ ]
 	call job_start(l:cmd, s:callback)
 endfunction
@@ -170,5 +170,7 @@ Plugin 'https://github.com/vim-python/python-syntax'
 Plugin 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
 
 Plugin 'translator'
+Plugin 'view'
+Plugin 'sync'
 
 call <SID>load_plugin_all()

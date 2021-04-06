@@ -16,6 +16,8 @@ function s:init_meta()
 		let l:key = nr2char(char2nr('A') + i)
 		call <SID>set_key(l:key)
 	endfor
+	call <SID>set_key(',')
+	call <SID>set_key('.')
 endfunction
 
 call <SID>init_meta()
@@ -45,6 +47,19 @@ nnoremap <Tab>v <C-w>v
 
 nnoremap <M-,> <C-w><
 nnoremap <M-.> <C-w>>
+
+noremap <M-h> <C-w>h
+noremap <M-j> <C-w>j
+noremap <M-k> <C-w>k
+noremap <M-l> <C-w>l
+
+noremap <M-n> <Cmd>bnext<CR>
+noremap <M-p> <Cmd>bprevious<CR>
+
+tnoremap <M-h> <C-\><C-n><C-w>h
+tnoremap <M-j> <C-\><C-n><C-w>j
+tnoremap <M-k> <C-\><C-n><C-w>k
+tnoremap <M-l> <C-\><C-n><C-w>l
 
 tnoremap <Esc> <C-\><C-n>
 
@@ -87,7 +102,7 @@ function s:get_selected_text(visual_mode) abort
 	let [l:line_start, l:column_start] = [line("'<"), col("'<")]
 	let [l:line_end, l:column_end] = [line("'>"), col("'>")]
 	let l:lines = getline(l:line_start, l:line_end)
-	if a:visual_mode ==# ''
+	if empty(a:visual_mode)
 		let l:text = expand('<cword>')
 	elseif a:visual_mode ==# "\<C-v>"
 		for l:i in range(len(l:lines))
@@ -105,6 +120,9 @@ endfunction
 function s:visual_secetion_search(visual_mode) abort
 	let l:text = s:get_selected_text(a:visual_mode)
 	let l:pattern = escape(l:text, "\\/.*'$^~[]")
+	if empty(a:visual_mode)
+		let l:pattern = '\<'.l:pattern.'\>'
+	endif
 	if a:visual_mode == 'v'
 		let l:pattern = substitute(l:pattern, '^\_s\+'.'\|'.'\_s\+$', '', 'g')
 		let l:pattern = substitute(l:pattern, '\n', '\\n', 'g')
