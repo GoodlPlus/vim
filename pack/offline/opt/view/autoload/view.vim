@@ -59,5 +59,5 @@ function view#save_view()
 	if len(l:lines) > s:vimview_max_lines
 		unlet l:lines[s:vimview_max_lines:]
 	endif
-	call writefile(l:lines, s:vimview_path, "S")
+	call writefile(l:lines, s:vimview_path)
 endfunction

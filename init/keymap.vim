@@ -257,10 +257,10 @@ function s:smooth_scroll_down(num)
 	endif
 endfunction
 
-noremap <C-u> <Cmd>call <SID>smooth_scroll_up(&scroll * 1)<CR>
-noremap <C-d> <Cmd>call <SID>smooth_scroll_down(&scroll * 1)<CR>
-noremap <C-b> <Cmd>call <SID>smooth_scroll_up(&scroll * 2)<CR>
-noremap <C-f> <Cmd>call <SID>smooth_scroll_down(&scroll * 2)<CR>
+" noremap <C-u> <Cmd>call <SID>smooth_scroll_up(&scroll * 1)<CR>
+" noremap <C-d> <Cmd>call <SID>smooth_scroll_down(&scroll * 1)<CR>
+" noremap <C-b> <Cmd>call <SID>smooth_scroll_up(&scroll * 2)<CR>
+" noremap <C-f> <Cmd>call <SID>smooth_scroll_down(&scroll * 2)<CR>
 
 
 " ------------------------------------------------------------------------------
