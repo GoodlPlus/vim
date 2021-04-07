@@ -1,3 +1,4 @@
 {
-	"clangd.semanticHighlighting": true
+	"clangd.semanticHighlighting": true,
+	"leetcode.language": "python3"
 }

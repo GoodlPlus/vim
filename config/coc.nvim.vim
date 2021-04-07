@@ -10,6 +10,7 @@ let g:coc_global_extensions =
 	\ "coc-json",
 	\ "coc-vimlsp",
 	\ "coc-sh",
+	\ "coc-leetcode",
 \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
