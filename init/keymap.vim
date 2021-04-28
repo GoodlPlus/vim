@@ -57,6 +57,95 @@ tnoremap <M-l> <C-\><C-n><C-w>l
 
 tnoremap <Esc> <C-\><C-n>
 
+" ------------------------------------------------------------------------------
+" ZOOM UNZOOM
+" ------------------------------------------------------------------------------
+nnoremap <M-z> :MaximizerToggle<CR>
+
+command! -bang -nargs=0 -range MaximizerToggle :call s:toggle(<bang>0)
+
+fun! s:toggle(force)
+	if exists('t:maximizer_sizes') && (a:force || (t:maximizer_sizes.after == winrestcmd()))
+		call s:restore()
+	elseif winnr('$') > 1
+		call s:maximize()
+	endif
+endfun
+
+fun! s:maximize()
+	let t:maximizer_sizes = { 'before': winrestcmd() }
+	vert resize | resize
+	let t:maximizer_sizes.after = winrestcmd()
+	normal! ze
+endfun
+
+fun! s:restore()
+	if exists('t:maximizer_sizes')
+		silent! exe t:maximizer_sizes.before
+		if t:maximizer_sizes.before != winrestcmd()
+			wincmd =
+		endif
+		unlet t:maximizer_sizes
+		normal! ze
+	end
+endfun
+
+" ------------------------------------------------------------------------------
+" Swap Window
+" ------------------------------------------------------------------------------
+" " 移动窗口
+" nnoremap <c-j> :call WindowSwap()<CR>:wincmd w<cr>:call WindowSwap()<cr>
+" nnoremap <c-k> :call WindowSwap()<CR>:wincmd W<cr>:call WindowSwap()<cr>
+" " 窗口交换 focus的窗口不变
+" nnoremap sx :call WindowSwap()<CR>:wincmd w<cr>:call WindowSwap()<cr>:wincmd W<cr>
+" nnoremap sX :call WindowSwap()<CR>:wincmd W<cr>:call WindowSwap()<cr>:wincmd w<cr>
+"
+" let s:markedWinNum = []
+"
+" " 第一次调用标记 第二次调用交换
+" function! WindowSwap()
+" 	if window_swap#HasMarkedWindow()
+" 		call window_swap#DoWindowSwap()
+" 	else
+" 		let s:markedWinNum = [tabpagenr(),winnr()]
+" 	endif
+" endfunction
+"
+" function! window_swap#DoWindowSwap()
+" 	if !window_swap#HasMarkedWindow()
+" 		echom "WindowSwap: No window marked to swap! Mark a window first."
+" 		return
+" 	endif
+" 	"Mark destination
+" 	let curTab = tabpagenr()
+" 	let curNum = winnr()
+" 	let curView = winsaveview()
+" 	let curBuf = bufnr( "%" )
+" 	let targetWindow = s:markedWinNum
+" 	exe "tabn " . targetWindow[0]
+" 	exe targetWindow[1] . "wincmd w"
+" 	"Switch to source and shuffle dest->source
+" 	let markedView = winsaveview()
+" 	let markedBuf = bufnr( "%" )
+" 	"Hide and open so that we aren't prompted and keep history
+" 	exe 'hide buf ' . curBuf
+" 	call winrestview(curView)
+" 	"Switch to dest and shuffle source->dest
+" 	exe "tabn " . curTab
+" 	exe curNum . "wincmd w"
+" 	"Hide and open so that we aren't prompted and keep history
+" 	exe 'hide buf ' . markedBuf
+" 	call winrestview(markedView)
+" 	let s:markedWinNum = []
+" endfunction
+"
+" function! window_swap#HasMarkedWindow()
+" 	if s:markedWinNum == []
+" 		return 0
+" 	else
+" 		return 1
+" 	endif
+" endfunction
 
 " ------------------------------------------------------------------------------
 " Turn the word to upper or lower case
