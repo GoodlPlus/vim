@@ -28,22 +28,16 @@ delfunction <SID>init_meta
 " ------------------------------------------------------------------------------
 " Personal tab keymaps
 " ------------------------------------------------------------------------------
-nnoremap <Tab>h <C-w>h
-nnoremap <Tab>j <C-w>j
-nnoremap <Tab>k <C-w>k
-nnoremap <Tab>l <C-w>l
-nnoremap <Tab>H <C-w>H
-nnoremap <Tab>J <C-w>J
-nnoremap <Tab>K <C-w>K
-nnoremap <Tab>L <C-w>L
-
-nnoremap <Tab>w <C-w>w
-nnoremap <Tab>c <C-w>c
-nnoremap <Tab>n <Cmd>bnext<CR>
-nnoremap <Tab>p <Cmd>bprevious<CR>
-
-nnoremap <Tab>s <C-w>s
-nnoremap <Tab>v <C-w>v
+" nnoremap <Tab>H <C-w>H
+" nnoremap <Tab>J <C-w>J
+" nnoremap <Tab>K <C-w>K
+" nnoremap <Tab>L <C-w>L
+"
+" nnoremap <Tab>w <C-w>w
+" nnoremap <Tab>c <C-w>c
+"
+" nnoremap <Tab>s <C-w>s
+" nnoremap <Tab>v <C-w>v
 
 nnoremap <M-,> <C-w><
 nnoremap <M-.> <C-w>>
@@ -257,10 +251,10 @@ function s:smooth_scroll_down(num)
 	endif
 endfunction
 
-" noremap <C-u> <Cmd>call <SID>smooth_scroll_up(&scroll * 1)<CR>
-" noremap <C-d> <Cmd>call <SID>smooth_scroll_down(&scroll * 1)<CR>
-" noremap <C-b> <Cmd>call <SID>smooth_scroll_up(&scroll * 2)<CR>
-" noremap <C-f> <Cmd>call <SID>smooth_scroll_down(&scroll * 2)<CR>
+noremap <C-u> <Cmd>call <SID>smooth_scroll_up(&scroll * 1)<CR>
+noremap <C-d> <Cmd>call <SID>smooth_scroll_down(&scroll * 1)<CR>
+noremap <C-b> <Cmd>call <SID>smooth_scroll_up(&scroll * 2)<CR>
+noremap <C-f> <Cmd>call <SID>smooth_scroll_down(&scroll * 2)<CR>
 
 
 " ------------------------------------------------------------------------------
