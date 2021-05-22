@@ -1,10 +1,7 @@
 let g:gruvbox_italic = 1
 let g:gruvbox_contrast_dark="hard"
+" let g:gruvbox_bold=0
 colorscheme gruvbox
-
-let g:python_recommended_style = 0
-let g:python_highlight_all = 1
-let g:python_slow_sync = 0
 
 let s:bg_0 = synIDattr(hlID('GruvboxBg0'), 'fg', 'gui')
 let s:bg_1 = synIDattr(hlID('GruvboxBg1'), 'fg', 'gui')

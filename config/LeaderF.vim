@@ -15,7 +15,7 @@ let g:Lf_MruMaxFiles = 999
 let g:Lf_DisableStl = 0
 " let g:Lf_StlColorscheme = 'gruvbox_material'
 let g:Lf_StlSeparator = {'left': '', 'right': ''}
-let g:Lf_DefaultExternalTool = 'rg'
+" let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_NormalMap =
 \ {
 	\ "File": [["<nowait> <ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
