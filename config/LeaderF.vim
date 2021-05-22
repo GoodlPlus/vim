@@ -60,7 +60,7 @@ nnoremap <Leader>m <Cmd>LeaderfMru<CR>
 nnoremap <Leader>/ <Cmd>LeaderfLine<CR>
 
 " nnoremap <silent><nowait> <Leader>* :<C-u><C-r>=printf('Leaderf! rg --current-buffer -e %s', expand('<cword>'))<CR><CR>
-" noremap <Leader>* :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+noremap <Leader>* :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 " " search visually selected text literally
 " xnoremap gf :<C-U><C-R>=printf("Leaderf rg -F -e %s ", leaderf#Rg#visual())<CR>
 " xnoremap gf <Cmd>Leaderf rg print<CR>
