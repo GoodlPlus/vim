@@ -54,7 +54,7 @@ let g:Lf_PopupShowFoldcolumn = 0
 
 " nnoremap <Leader>f <Cmd>LeaderfSelf<CR>
 nnoremap <Leader>h <Cmd>LeaderfHelp<CR>
-nnoremap <Leader>b <Cmd>LeaderfBufferAll<CR>
+nnoremap <Leader>b <Cmd>LeaderfBuffer<CR>
 nnoremap <Leader>m <Cmd>LeaderfMru<CR>
 " nnoremap <Leader>t <Cmd>LeaderfBufTag<CR>
 nnoremap <Leader>/ <Cmd>LeaderfLine<CR>
