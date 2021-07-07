@@ -231,6 +231,8 @@ endfunction
 
 let s:highlight_config =
 \ {
+	\ 'Normal': 			[{'NONE': 0}, {'guibg': 'NONE'}],
+	\
 	\ 'GruvboxRedSign': 	[{'NONE': 0}, {'guibg': 'NONE'}],
 	\ 'GruvboxGreenSign': 	[{'NONE': 0}, {'guibg': 'NONE'}],
 	\ 'GruvboxYellowSign': 	[{'NONE': 0}, {'guibg': 'NONE'}],
