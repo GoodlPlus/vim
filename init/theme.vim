@@ -259,6 +259,10 @@ let s:highlight_config =
 	\ 'SignColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
 	\ 'FoldColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
 \ }
+" 	\ 'TabLineSel': 		[{'NONE': 1}, {'guifg': s:fg_1, 'guibg': s:bg_1}],
+" 	\ 'TabLine': 			[{'NONE': 1}, {'guifg': s:fg_4, 'guibg': s:bg_0}],
+" 	\ 'TabLineFill': 		[{'NONE': 1}, {'guifg': s:fg_4, 'guibg': s:bg_0}],
+" 	\
 	" \ 'CursorLineNr': 		[{'NONE': 1}, {'guifg': s:fg_1, 'guibg': s:bg_0}],
 	" \ 'SignColumn': 		[{'NONE': 0}, {'guibg': s:bg_0}],
 	" \

@@ -5,6 +5,7 @@
 " remove vi compatible
 " set nocompatible " Default on
 
+language en_US.UTF-8
 syntax enable
 filetype plugin indent on
 set termguicolors
