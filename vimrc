@@ -4,6 +4,7 @@ else
 	let s:loaded = 1
 endif
 
+let $LANG="en"
 set nocompatible
 
 let g:loaded_getscriptPlugin = 1
