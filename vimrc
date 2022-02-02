@@ -7,17 +7,17 @@ endif
 let $LANG="en"
 set nocompatible
 
-let g:loaded_getscriptPlugin = 1
-let loaded_gzip = 1
-let loaded_logiPat = 1
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-let loaded_rrhelper = 1
-let loaded_spellfile_plugin = 1
-let g:loaded_tarPlugin = 1
-let g:loaded_2html_plugin = 1
-let g:loaded_vimballPlugin = 1
-let g:loaded_zipPlugin = 1
+" let g:loaded_getscriptPlugin = 1
+" let loaded_gzip = 1
+" let loaded_logiPat = 1
+" let g:loaded_netrw = 1
+" let g:loaded_netrwPlugin = 1
+" let loaded_rrhelper = 1
+" let loaded_spellfile_plugin = 1
+" let g:loaded_tarPlugin = 1
+" let g:loaded_2html_plugin = 1
+" let g:loaded_vimballPlugin = 1
+" let g:loaded_zipPlugin = 1
 
 const g:_VIM_PATH = fnameescape(expand('<sfile>:p:h'))
 const g:_VIM_CACHE_PATH = fnameescape(join([g:_VIM_PATH, 'cache'], '/'))

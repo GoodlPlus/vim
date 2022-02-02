@@ -82,6 +82,7 @@ function sync#sync(mode)
 	endfor
 	if empty(l:cmd)
 		return
+	else
+		call job_start(l:cmd, s:callback)
 	endif
-	call job_start(l:cmd, s:callback)
 endfunction

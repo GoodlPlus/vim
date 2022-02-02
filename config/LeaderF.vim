@@ -49,7 +49,7 @@ let g:Lf_PreviewInPopup = 1
 " let g:Lf_PreviewHorizontalPosition = 'center'
 " let g:Lf_PreviewPopupWidth = &columns
 " let g:Lf_PopupHeight = 0.2
-let g:Lf_PopupColorscheme = 'gruvbox'
+let g:Lf_PopupColorscheme = 'gruvbox_material'
 let g:Lf_PopupShowFoldcolumn = 0
 
 " nnoremap <Leader>f <Cmd>LeaderfSelf<CR>

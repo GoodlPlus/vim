@@ -165,7 +165,7 @@ Plugin 'matchit'
 Plugin 'https://github.com/morhetz/gruvbox'
 Plugin 'https://github.com/neoclide/coc.nvim'
 Plugin 'https://github.com/Yggdroot/LeaderF', {'cmd': 'LeaderfInstallCExtension'}
-Plugin 'https://github.com/tamago324/LeaderF-filer'
+" Plugin 'https://github.com/tamago324/LeaderF-filer'
 Plugin 'https://github.com/lervag/vimtex'
 Plugin 'https://github.com/honza/vim-snippets'
 Plugin 'https://github.com/vim-python/python-syntax'
