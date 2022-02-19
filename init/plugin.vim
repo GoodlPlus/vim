@@ -49,6 +49,7 @@ function s:exit_cb(channel, message) abort
 	endfor
 	if l:job_info['exitval'] == 0
 		echomsg join(['Successfully:', l:type, l:plugin_name])
+		call <SID>post_process(l:plugin_name)
 	else
 		echomsg join(['Failed:', l:type, l:plugin_name])
 	endif
@@ -87,11 +88,57 @@ function s:exists_plugin(plugin_name)
 	endif
 endfunction
 
+" ------------------------------------------------------------------------------
+" Utils
+" ------------------------------------------------------------------------------
+function s:get_plugin_info_dict(plugin_name)
+	return s:plugin_dict[a:plugin_name]
+endfunction
+
+" ------------------------------------------------------------------------------
+" Git Process
+" ------------------------------------------------------------------------------
+function s:git_process(plugin_name)
+	let l:cmd = []
+	let l:plugin_info_dict = <SID>get_plugin_info_dict(a:plugin_name)
+	if has_key(l:plugin_info_dict, 'branch')
+		let l:cmd += <SID>branch_process(l:plugin_info_dict['branch'])
+	endif
+	return l:cmd
+endfunction
+
+function s:branch_process(branch)
+	let l:cmd =
+	\ [
+		\ '-b',
+		\ a:branch,
+	\ ]
+	return l:cmd
+endfunction
+
+" ------------------------------------------------------------------------------
+" Post Process
+" ------------------------------------------------------------------------------
+function s:post_process(plugin_name)
+	let l:plugin_info_dict = <SID>get_plugin_info_dict(a:plugin_name)
+	if has_key(l:plugin_info_dict, 'cmd')
+		call <SID>cmd_process(l:plugin_info_dict['cmd'])
+	endif
+endfunction
+
+function s:cmd_process(cmd)
+	execute a:cmd
+endfunction
+
+" ------------------------------------------------------------------------------
+" Plugin Process
+" ------------------------------------------------------------------------------
 function s:install_plugin(plugin_name)
 	let l:plugin_path = s:get_plugin_path(a:plugin_name)
-	let l:url = s:plugin_dict[a:plugin_name]['url']
-	" let l:url = substitute(l:url, '\(https://\)\@<=github\.com', 'hub.fastgit.org', '')
-	let l:url = substitute(l:url, 'https://github.com', 'https://github.com.cnpmjs.org', '')
+	let l:plugin_info_dict = <SID>get_plugin_info_dict(a:plugin_name)
+	let l:url = l:plugin_info_dict['url']
+" 	let l:url = substitute(l:url, '\(https://\)\@<=github\.com', 'hub.fastgit.org', '')
+" 	let l:url = substitute(l:url, 'https://github.com', 'https://github.com.cnpmjs.org', '')
 	let l:cmd =
 	\ [
 		\ 'git',
@@ -100,6 +147,7 @@ function s:install_plugin(plugin_name)
 		\ l:url,
 		\ l:plugin_path,
 	\ ]
+	let l:cmd += <SID>git_process(a:plugin_name)
 	call job_start(l:cmd, s:callback)
 endfunction
 
@@ -144,17 +192,9 @@ function s:uninstall_plugin_all()
 	endfor
 endfunction
 
-function s:cmd_process(cmd)
-	execute a:cmd
-endfunction
-
-function s:post_process(plugin_name)
-	let l:plugin_info_dict = s:plugin_dict[a:plugin_name]
-	if has_key(l:plugin_info_dict, 'cmd')
-		call <SID>cmd_process(l:plugin_info_dict['cmd'])
-	endif
-endfunction
-
+" ------------------------------------------------------------------------------
+" Command
+" ------------------------------------------------------------------------------
 command -nargs=+ Plugin call <SID>plugin(<args>)
 command InstallPlugin call <SID>install_plugin_all()
 command UninstallPlugin call <SID>uninstall_plugin_all()
@@ -163,7 +203,7 @@ command UpdatePlugin call <SID>update_plugin_all()
 Plugin 'matchit'
 
 Plugin 'https://github.com/morhetz/gruvbox'
-Plugin 'https://github.com/neoclide/coc.nvim'
+Plugin 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'https://github.com/Yggdroot/LeaderF', {'cmd': 'LeaderfInstallCExtension'}
 " Plugin 'https://github.com/tamago324/LeaderF-filer'
 Plugin 'https://github.com/lervag/vimtex'
