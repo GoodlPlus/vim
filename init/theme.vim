@@ -1,5 +1,5 @@
 let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_dark = "hard"
 " let g:gruvbox_bold=0
 colorscheme gruvbox
 
@@ -351,6 +351,9 @@ function TabLine() abort
 	return l:tabline
 endfunction
 
+" ------------------------------------------------------------------------------
+" Command
+" ------------------------------------------------------------------------------
 call <SID>set_highlight_group()
 set tabline=%!TabLine()
 
