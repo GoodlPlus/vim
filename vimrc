@@ -1,7 +1,7 @@
-if get(s:, 'loaded', 0)
-	finish
+if exists('g:loaded')
+    finish
 else
-	let s:loaded = 1
+    let g:loaded = 1
 endif
 
 let $LANG="en"
