@@ -202,33 +202,9 @@ let g:file_palette =
 	\ 'zsh':          {'guifg': '#d9b400'},
 \ }
 
-function s:get_highlight_palette(file_type, status) abort
-	if empty(a:file_type)
-		let l:icon = g:default_file_icon
-		let l:palette = g:file_palette['_']
-	else
-		let l:palette = get(g:file_palette, a:file_type, g:file_palette['_'])
-	endif
-	let l:highlight_group = join(['palette', a:file_type, a:status], '_')
-	if !highlight_exists(l:highlight_group)
-		execute printf('highlight %s guifg=%s guibg=%s', l:highlight_group, l:palette['guifg'], a:status ==# 'active' ? s:bg_1 : s:bg_0)
-	endif
-	return '%#'.l:highlight_group.'#'
-endfunction
-
-function GetFileType(buffer_id) abort
-	let l:file_extension = fnamemodify(bufname(a:buffer_id), ':e')
-	if !empty(l:file_extension) && has_key(g:file_icon, l:file_extension)
-		return l:file_extension
-	else
-		return getbufvar(a:buffer_id, '&filetype')
-	endif
-endfunction
-
-function GetFileIcon(file_type) abort
-	return get(g:file_icon, a:file_type, g:default_file_icon)
-endfunction
-
+" ------------------------------------------------------------------------------
+" Highlight Config
+" ------------------------------------------------------------------------------
 let s:highlight_config =
 \ {
 	\ 'Normal': 			[{'NONE': 0}, {'guibg': 'NONE'}],
@@ -269,32 +245,38 @@ let s:highlight_config =
 	" \ 'Search': 			[{'NONE': 1}, {'guifg': s:bg_0, 'guibg': s:fg_1}],
 	" \ 'IncSearch': 			[{'NONE': 1}, {'guifg': s:bg_0, 'guibg': s:fg_1}],
 
-let s:statusline_config =
-\ [
-	\ '%#StatusLine#',
-	\ '%{GetFileName()} ',
-	\ '%{&readonly?" ":""}',
-	\ '%{&modified?"+ ":""}',
-	\ '%*',
-	\
-	\ '%#StatusLineNC#',
-	\ '%=',
-	\ '%*',
-	\
-	\ '%#StatusLine#',
-	\ ' %p%%',
-	\ ' %{(&fileencoding == "" ? &encoding : &fileencoding).(&bomb ? ",BOM" : "")}',
-	\ ' %{g:fileformat_icon[&fileformat]} ',
-	\ '%*',
-\ ]
-
-function GetFileName() abort
-	let l:file_name = expand('%:~')
-	if &filetype ==# 'leaderf' && &buftype ==# 'nofile'
-		let l:file_name = matchstr(l:file_name, '\(\/usr\/share\/vim\/vim82\/\)\@<=.\+\(\/LeaderF\)\@=')
-		let l:file_name .= ' ['.line('.').'/'.line('$').']'
+function s:get_highlight_palette(file_type, status) abort
+	if empty(a:file_type)
+		let l:icon = g:default_file_icon
+		let l:palette = g:file_palette['_']
+	else
+		let l:palette = get(g:file_palette, a:file_type, g:file_palette['_'])
 	endif
-	return l:file_name
+	let l:highlight_group = join(['palette', a:file_type, a:status], '_')
+	if !highlight_exists(l:highlight_group)
+		execute printf('highlight %s guifg=%s guibg=%s', l:highlight_group, l:palette['guifg'], a:status ? s:bg_1 : s:bg_0)
+	endif
+	return '%#'.l:highlight_group.'#'
+endfunction
+
+" ------------------------------------------------------------------------------
+" TabLine
+" ------------------------------------------------------------------------------
+function s:get_file_type(buffer_index, window_index = 0) abort
+	let l:file_extension = fnamemodify(bufname(a:buffer_index), ':e')
+	if !empty(l:file_extension) && has_key(g:file_icon, l:file_extension)
+		return l:file_extension
+	else
+		if a:window_index
+			return getwinvar(a:window_index, '&filetype')
+		else
+			return getbufvar(a:buffer_index, '&filetype')
+		endif
+	endif
+endfunction
+
+function s:get_file_icon(file_type) abort
+	return get(g:file_icon, a:file_type, g:default_file_icon)
 endfunction
 
 function s:set_highlight_group() abort
@@ -307,42 +289,30 @@ function s:set_highlight_group() abort
 	endfor
 endfunction
 
-function StatusLine(status) abort
-	let l:file_type = GetFileType(bufnr('%'))
-	let l:statusline = ''
-	let l:statusline .= s:get_highlight_palette(l:file_type, a:status)
-	let l:statusline .= ' '.GetFileIcon(l:file_type).' '
-	let l:statusline .= '%*'
-	for l:i in s:statusline_config
-		let l:statusline .= l:i
-	endfor
-	return l:statusline
-endfunction
-
 function TabLine() abort
 	let l:tabline = ''
 	for l:i in range(1, bufnr('$'))
 		if buflisted(l:i)
-			let l:file_type = GetFileType(l:i)
+			let l:file_type = <SID>get_file_type(l:i)
 			if l:i == bufnr('%')
 				let l:highlight_default = '%#TabLineSel#'
-				let l:highlight_icon = s:get_highlight_palette(l:file_type, 'active')
+				let l:highlight_icon = <SID>get_highlight_palette(l:file_type, 1)
 			else
 				let l:highlight_default = '%#TabLine#'
 " 				let l:highlight_icon = '%#TabLine#'
-				let l:highlight_icon = s:get_highlight_palette(l:file_type, 'inactive')
+				let l:highlight_icon = <SID>get_highlight_palette(l:file_type, 0)
 			endif
 			let l:tabline .= l:highlight_default
-			let l:tabline .= getbufvar(l:i, '&modified') ? '+' : ' '
-			let l:tabline .= '%*'
+			let l:tabline .= ' %*'
 
 			let l:tabline .= l:highlight_icon
-			let l:tabline .= GetFileIcon(l:file_type).' '
-			let l:tabline .= '%*'
+			let l:tabline .= <SID>get_file_icon(l:file_type)
+			let l:tabline .= ' %*'
 
 			let l:tabline .= l:highlight_default
-			let l:tabline .= fnamemodify(bufname(l:i), ':t').' '
-			let l:tabline .= '%*'
+			let l:tabline .= fnamemodify(bufname(l:i), ':t')
+			let l:tabline .= getbufvar(l:i, '&modified') ? ' +' : ''
+			let l:tabline .= ' %*'
 		endif
 	endfor
 	let l:tabline .= '%#TabLineFill#'
@@ -351,14 +321,62 @@ function TabLine() abort
 	return l:tabline
 endfunction
 
+function s:get_file_name_by_buffer_index(buffer_index) abort
+	let l:file_name = fnamemodify(bufname(a:buffer_index), ':~')
+	return l:file_name
+endfunction
+
 " ------------------------------------------------------------------------------
-" Command
+" StatusLine
+" ------------------------------------------------------------------------------
+function StatusLine(window_index, active) abort
+	let l:buffer_index = winbufnr(a:window_index)
+	let l:file_type = <SID>get_file_type(l:buffer_index, a:window_index)
+	let l:file_name = <SID>get_file_name_by_buffer_index(l:buffer_index)
+
+	let l:statusline = ''
+	let l:statusline .= s:get_highlight_palette(l:file_type, a:active)
+	let l:statusline .= ' '.<SID>get_file_icon(l:file_type).' '
+	let l:statusline .= '%*'
+	let l:statusline .= a:active ? '%#StatusLine#' : '%#StatusLineNC#'
+	let l:statusline .= l:file_name.' '
+	let l:statusline .= '%{&readonly ? " " : ""}'
+	let l:statusline .= '%{&modified ? "+ " : ""}'
+	let l:statusline .= '%*'
+
+	let l:statusline .= '%#StatusLineNC#'
+	let l:statusline .= '%='
+	let l:statusline .= '%*'
+
+	let l:statusline .= a:active ? '%#StatusLine#' : '%#StatusLineNC#'
+	let l:statusline .= ' %p%%'
+	let l:statusline .= ' %{(&fileencoding == "" ? &encoding : &fileencoding).(&bomb ? ",BOM" : "")}'
+	let l:statusline .= ' %{g:fileformat_icon[&fileformat]} '
+	let l:statusline .= '%*'
+	return l:statusline
+endfunction
+
+function s:update_statusline() abort
+	let l:now_window_index = winnr()
+	let l:previous_window_index = winnr('#')
+	let l:window_number = winnr('$')
+
+	for l:window_index in range(1, l:window_number)
+		let l:active = l:window_index == l:now_window_index
+		call setwinvar(l:window_index, "&statusline", StatusLine(l:window_index, l:active))
+	endfor
+endfunction
+
+" ------------------------------------------------------------------------------
+" TabLine Command
 " ------------------------------------------------------------------------------
 call <SID>set_highlight_group()
 set tabline=%!TabLine()
 
+" ------------------------------------------------------------------------------
+" StatusLine Command
+" ------------------------------------------------------------------------------
 augroup auto_update_statusline
 	autocmd!
-	autocmd BufEnter,WinEnter * call setbufvar('%', '&statusline', StatusLine('active'))
-	autocmd WinLeave * call setbufvar('%', '&statusline', StatusLine('inactive'))
+	autocmd BufEnter,WinEnter * call <SID>update_statusline()
 augroup END
