@@ -1,3 +1,9 @@
+if exists('g:sync#loaded')
+    finish
+else
+    let g:sync#loaded = 1
+endif
+
 let s:debug_mode = 0
 
 function sync#exit_cb(channel, message) abort

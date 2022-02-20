@@ -26,10 +26,10 @@ let s:init_path = fnameescape(join([g:_VIM_PATH, s:init_name], '/'))
 let s:init_list =
 \ [
 	\ 'basic',
-	\ 'plugin',
-	\ 'keymap',
-	\ 'theme',
 \ ]
+" 	\ 'plugin',
+" 	\ 'keymap',
+" 	\ 'theme',
 
 function SourceVim(path, name)
 	let l:name = a:name.'.vim'

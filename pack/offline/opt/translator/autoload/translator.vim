@@ -1,3 +1,9 @@
+if exists('g:translator#loaded')
+    finish
+else
+    let g:translator#loaded = 1
+endif
+
 let s:translator_file = expand('<sfile>:p:h').'/../utils/translator.py'
 
 function translator#translate_out_cb(channel, message) abort

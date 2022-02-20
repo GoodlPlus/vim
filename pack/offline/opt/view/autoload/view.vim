@@ -1,6 +1,12 @@
 " ------------------------------------------------------------------------------
 " Resume last position
 " ------------------------------------------------------------------------------
+if exists('g:view#loaded')
+    finish
+else
+    let g:view#loaded = 1
+endif
+
 let s:vimview_name = 'vimview'
 let s:vimview_path = fnameescape(join([g:_VIM_CACHE_PATH, s:vimview_name], '/'))
 let s:vimview_max_files = 999
