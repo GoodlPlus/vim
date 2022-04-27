@@ -7,8 +7,8 @@ let g:tex_conceal = 'abdmg'
 
 let g:vimtex_view_method = "skim"
 " let g:vimtex_view_general_viewer = 'skim'
-let g:vimtex_view_general_options
-	\ = '-reuse-instance -forward-search @tex @line @pdf'
+" let g:vimtex_view_general_options
+" 	\ = '-reuse-instance -forward-search @tex @line @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 let g:vimtex_view_general_options
 	\ = '-reuse-instance -forward-search @tex @line @pdf'

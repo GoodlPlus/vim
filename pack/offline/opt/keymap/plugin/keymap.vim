@@ -96,7 +96,8 @@ nnoremap <Esc><Esc> <Cmd>nohlsearch<CR>
 " ------------------------------------------------------------------------------
 " Personal compile and run
 " ------------------------------------------------------------------------------
-nnoremap <M-5> <Cmd>call keymap#compile_run()<CR>
+" nnoremap <Leader-5> <Cmd>call keymap#compile_run()<CR>
+nnoremap <Leader>5 <Cmd>call keymap#compile_run()<CR>
 
 " ------------------------------------------------------------------------------
 " Personal comment
