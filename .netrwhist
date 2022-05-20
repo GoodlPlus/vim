@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
-let g:netrw_dirhist_5='/Users/ljh/Documents/code/python/PFA_BUPT'
-let g:netrw_dirhist_4='/Users/ljh/Documents/code/python/DeepFake_rPPG/code/util'
-let g:netrw_dirhist_3='/Users/ljh/.vim/pack/offline/opt/sync/plugin'
-let g:netrw_dirhist_2='/Users/ljh/Documents/code/python/code'
-let g:netrw_dirhist_1='/Users/ljh/.vim/pack/offline/opt/theme/plugin'

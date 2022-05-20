@@ -10,6 +10,7 @@ Plugin 'keymap'
 Plugin 'theme'
 Plugin 'matchit'
 
+Plugin 'https://github.com/Yggdroot/indentLine'
 Plugin 'https://github.com/morhetz/gruvbox'
 Plugin 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'https://github.com/Yggdroot/LeaderF', {'cmd': 'LeaderfInstallCExtension'}

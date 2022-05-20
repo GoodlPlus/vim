@@ -63,10 +63,10 @@ let &t_EI = "\e[2 q" "EI = NORMAL mode (ELSE)
 " set autoindent " Default on
 set shiftwidth=4
 " set cindent "Default on
-" set expandtab
+set expandtab " Space
 set tabstop=4
 " set smarttab
-" set softtabstop=4
+set softtabstop=4 " Space
 " set shiftround
 
 set list
@@ -127,9 +127,9 @@ set viminfo=%,'999,/999,:999,<999999,@999,c,f1,s1024,
 set timeoutlen=500
 set ttimeout
 if $TMUX != ""
-	set ttimeoutlen=10
+    set ttimeoutlen=10
 elseif &ttimeoutlen > 50 || &ttimeoutlen <= 0
-	set ttimeoutlen=50
+    set ttimeoutlen=50
 endif
 
 
@@ -137,7 +137,7 @@ endif
 " DiffOrig
 " ------------------------------------------------------------------------------
 command DiffOrig vert new | set buftype=nofile | r ++edit # | 0d_
-	\ | diffthis | wincmd p | diffthis
+    \ | diffthis | wincmd p | diffthis
 
 
 " ------------------------------------------------------------------------------
@@ -146,9 +146,9 @@ command DiffOrig vert new | set buftype=nofile | r ++edit # | 0d_
 " Do not use smart case in command line mode,
 " extracted from https://vi.stackexchange.com/q/16509/15292
 augroup auto_smartcase
-	autocmd!
-	autocmd CmdLineEnter : set nosmartcase
-	autocmd CmdLineLeave : set smartcase
+    autocmd!
+    autocmd CmdLineEnter : set nosmartcase
+    autocmd CmdLineLeave : set smartcase
 augroup END
 
 
@@ -156,12 +156,21 @@ augroup END
 " Remove trailing space
 " ------------------------------------------------------------------------------
 augroup auto_remove_trailing_space
-	autocmd!
-	autocmd BufWritePre
-		\ * let b:last_pos = [line('.'), col('.')]
-		\ | silent %s/\s\+$//e
-		\ | call cursor(b:last_pos)
-		\ | unlet b:last_pos
+    autocmd!
+    autocmd BufWritePre
+        \ * let b:last_pos = [line('.'), col('.')]
+        \ | silent %s/\s\+$//e
+        \ | call cursor(b:last_pos)
+        \ | unlet b:last_pos
 augroup END
 
-" viewoption
+" augroup auto_retab
+"   autocmd!
+"   auto BufReadPost
+"               \ * if &modifiable
+"               \ | retab!
+" "             \ | exe "set ul=-1 | e! | set ul=" . &ul
+"               \ | endif
+"   auto BufWritePre * set expandtab | retab!
+"   auto BufWritePost * set noexpandtab | retab!
+" augroup END
