@@ -158,11 +158,11 @@ endfunction
 function keymap#compile_run() abort
 	execute "w"
 	if &filetype == "c"
-		execute "!gcc -Wall -std=c18 % -o %< && time ./%<"
+		execute "!gcc -Wall -std=c18 % -o %< && time ./%< && rm ./%<"
 	elseif &filetype == "cpp"
-		execute "!g++ -Wall -std=c++20 % -o %< && time ./%<"
+		execute "!g++ -Wall -std=c++20 % -o %< && time ./%< && rm ./%<"
 	elseif &filetype == "python"
-		execute "!time python %"
+		execute "!time python3 %"
 	elseif &filetype == "vim"
 		execute "source %"
 	endif
