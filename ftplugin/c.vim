@@ -4,8 +4,8 @@
 function s:auto_parantheses() abort
 	if col('.') >= 2 && getline('.')[col('.') - 2] == '{' && getline('.')[col('.') - 1] == '}'
         return "\<CR>\<Tab>\<CR>\<Up>\<End>"
-    elseif col('.') >= 2 && getline('.')[col('.') - 2] == '{' " && getline('.')[col('.') - 1] == '}'
-        return "\<CR>\<Tab>\<CR>\}\<Up>\<End>\<BS>"
+"     elseif col('.') >= 2 && getline('.')[col('.') - 2] == '{' " && getline('.')[col('.') - 1] == '}'
+"         return "\<CR>\<Tab>\<CR>\}\<Up>\<End>\<BS>"
 	else
 		return "\<CR>"
 	endif
