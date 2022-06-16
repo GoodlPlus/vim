@@ -143,7 +143,7 @@ function s:install_plugin(plugin_name)
 	let l:plugin_path = s:get_plugin_path(a:plugin_name)
 	let l:plugin_info_dict = <SID>get_plugin_info_dict(a:plugin_name)
 	let l:url = l:plugin_info_dict['url']
-" 	let l:url = substitute(l:url, '\(https://\)\@<=github\.com', 'hub.fastgit.org', '')
+	let l:url = substitute(l:url, '\(https://\)\@<=github\.com', 'hub.fastgit.xyz', '')
 " 	let l:url = substitute(l:url, 'https://github.com', 'https://github.com.cnpmjs.org', '')
 	let l:cmd =
 	\ [
