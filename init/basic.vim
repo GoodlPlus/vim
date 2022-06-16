@@ -50,6 +50,7 @@ set regexpengine=1
 
 " Highlight current line
 set cursorlineopt=number cursorline
+set fillchars=eob:\ ,
 
 " Set cursor shape
 " See https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
