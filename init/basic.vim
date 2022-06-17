@@ -71,7 +71,8 @@ set softtabstop=4 " Space
 " set shiftround
 
 set list
-set listchars=tab:\╏\ ,
+" set listchars=multispace:\╏\ ,
+set listchars=multispace:\╏\ \ \ ,
 " set listchars=tab:\ￜ\
 " set listchars=tab:\❙\
 " set listchars=tab:\ﺍ\
