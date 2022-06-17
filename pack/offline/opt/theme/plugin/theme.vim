@@ -1,7 +1,6 @@
-let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = "hard"
-" let g:gruvbox_bold=0
-colorscheme gruvbox
+let g:gruvbox_material_background = 'dark'
+let g:gruvbox_material_better_performance = 1
+colorscheme gruvbox-material
 
 " ------------------------------------------------------------------------------
 " Theme Command

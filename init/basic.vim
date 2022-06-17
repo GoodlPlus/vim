@@ -34,7 +34,7 @@ set spell
 
 " Show line number
 set number
-" set relativenumber
+set relativenumber
 set signcolumn=number
 " set foldcolumn=1
 " set numberwidth=5
