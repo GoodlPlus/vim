@@ -154,13 +154,16 @@ augroup END
 
 
 " ------------------------------------------------------------------------------
-" Remove trailing space
+" Remove trailing space and line
+" https://stackoverflow.com/questions/7495932/how-can-i-trim-blank-lines-at-the-end-of-file-in-vim
 " ------------------------------------------------------------------------------
-augroup auto_remove_trailing_space
+augroup auto_remove_trailing_space_and_line
     autocmd!
     autocmd BufWritePre
         \ * let b:last_pos = [line('.'), col('.')]
         \ | silent %s/\s\+$//e
+        \ | silent %s/\_s*\%$//e
+        \ | silent %s/\%^\_s*//e
         \ | call cursor(b:last_pos)
         \ | unlet b:last_pos
 augroup END

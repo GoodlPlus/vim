@@ -10,11 +10,11 @@ endif
 " ------------------------------------------------------------------------------
 " Personal alt keymaps
 " ------------------------------------------------------------------------------
-function s:set_key(key)
+function s:set_key(key) abort
 	execute "set <M-".a:key.">=\e".a:key
 endfunction
 
-function keymap#init_meta()
+function keymap#init_meta() abort
 	for i in range(10)
 		let l:key = nr2char(char2nr('0') + i)
 		call <SID>set_key(l:key)
@@ -31,7 +31,7 @@ function keymap#init_meta()
 endfunction
 
 
-function keymap#toggle(force)
+function keymap#toggle(force) abort
 	if exists('t:maximizer_sizes') && (a:force || (t:maximizer_sizes.after == winrestcmd()))
 		call s:restore()
 	elseif winnr('$') > 1
@@ -39,14 +39,14 @@ function keymap#toggle(force)
 	endif
 endfunction
 
-function s:maximize()
+function s:maximize() abort
 	let t:maximizer_sizes = { 'before': winrestcmd() }
 	vert resize | resize
 	let t:maximizer_sizes.after = winrestcmd()
 	normal! ze
 endfunction
 
-function s:restore()
+function s:restore() abort
 	if exists('t:maximizer_sizes')
 		silent! exe t:maximizer_sizes.before
 		if t:maximizer_sizes.before != winrestcmd()
@@ -156,22 +156,25 @@ endfunction
 " Personal compile and run
 " ------------------------------------------------------------------------------
 function keymap#compile_run() abort
-	execute "w"
-	if &filetype == "c"
-		execute "!gcc -Wall -std=c18 % -o %< && time ./%< && rm ./%<"
-	elseif &filetype == "cpp"
-		execute "!g++ -Wall -std=c++20 % -o %< && time ./%< && rm ./%<"
-	elseif &filetype == "python"
-		execute "!time python3 %"
-	elseif &filetype == "vim"
-		execute "source %"
+	execute 'w'
+    let l:splitbelow = &splitbelow
+    set splitbelow
+	if &filetype == 'c'
+		terminal ++shell gcc -Wall -std=c18 % -o %< && time ./%< && rm ./%<
+	elseif &filetype == 'cpp'
+		terminal ++shell g++ -Wall -std=c++20 % -o %< && time ./%< && rm ./%<
+	elseif &filetype == 'python'
+		terminal ++shell time python3 %
+	elseif &filetype == 'vim'
+		execute 'source %'
 	endif
+    let &splitbelow = l:splitbelow
 endfunction
 
 " ------------------------------------------------------------------------------
 " Personal comment
 " ------------------------------------------------------------------------------
-function keymap#comment()
+function keymap#comment() abort
 	if index(["vim"], &filetype) >= 0
 		let l:comment_symbol = '\"'
 	elseif index(["c", "cpp"], &filetype) >= 0
