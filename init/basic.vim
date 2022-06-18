@@ -159,24 +159,38 @@ augroup END
 " Remove trailing space and line
 " https://stackoverflow.com/questions/7495932/how-can-i-trim-blank-lines-at-the-end-of-file-in-vim
 " ------------------------------------------------------------------------------
-augroup auto_remove_trailing_space_and_line
+augroup auto_remove_trailing_spaces_and_lines
     autocmd!
     autocmd BufWritePre
         \ * let b:last_pos = [line('.'), col('.')]
         \ | silent %s/\s\+$//e
-        \ | silent %s/\_s*\%$//e
-        \ | silent %s/\%^\_s*//e
+        \ | call <SID>remove_trailing_lines()
         \ | call cursor(b:last_pos)
         \ | unlet b:last_pos
 augroup END
+"         \ | silent %s/\%^\_s*//e
+"         \ | silent %s/\_s*\%$//e
+
+function s:remove_trailing_lines()
+    let l:first_line = line('^')
+    let l:first_non_blank_line = nextnonblank(l:first_line)
+    if l:first_non_blank_line - 1 >= l:first_line + 1
+        call deletebufline('%', l:first_line + 1, l:first_non_blank_line - 1)
+    endif
+    let l:last_line = line('$')
+    let l:last_non_blank_line = prevnonblank(l:last_line)
+    if l:last_non_blank_line + 1 <= l:last_line
+        call deletebufline('%', l:last_non_blank_line + 1, l:last_line)
+    endif
+endfunction
 
 " augroup auto_retab
-"   autocmd!
-"   auto BufReadPost
-"               \ * if &modifiable
-"               \ | retab!
-" "             \ | exe "set ul=-1 | e! | set ul=" . &ul
-"               \ | endif
-"   auto BufWritePre * set expandtab | retab!
-"   auto BufWritePost * set noexpandtab | retab!
+"     autocmd!
+"     auto BufReadPost
+"                 \ * if &modifiable
+"                 \ | retab!
+"     "             \ | exe "set ul=-1 | e! | set ul=" . &ul
+"                 \ | endif
+"     auto BufWritePre * set expandtab | retab!
+"     auto BufWritePost * set noexpandtab | retab!
 " augroup END
