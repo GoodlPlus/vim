@@ -15,7 +15,7 @@ Plugin 'matchit'
 Plugin 'https://github.com/sainnhe/gruvbox-material'
 Plugin 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'https://github.com/Yggdroot/LeaderF', {'cmd': 'LeaderfInstallCExtension'}
-Plugin 'https://github.com/tamago324/LeaderF-filer'
+" Plugin 'https://github.com/tamago324/LeaderF-filer'
 Plugin 'https://github.com/lervag/vimtex'
 Plugin 'https://github.com/honza/vim-snippets'
 Plugin 'https://github.com/vim-python/python-syntax'
