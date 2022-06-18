@@ -57,8 +57,9 @@ set fillchars=eob:\ ,
 let &t_SI = "\e[6 q" "SI = INSERT mode
 let &t_SR = "\e[4 q" "SR = REPLACE mode
 let &t_EI = "\e[2 q" "EI = NORMAL mode (ELSE)
-" let &t_Cs = "\e[4:3m"
-" let &t_Ce = "\e[4:0m"
+" Enable undercurl
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 
 " Set indent width
 " set autoindent " Default on
