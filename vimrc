@@ -28,25 +28,25 @@ let s:init_name = fnameescape('init')
 let s:init_path = fnameescape(join([g:_VIM_PATH, s:init_name], '/'))
 let s:init_list =
 \ [
-	\ 'basic',
+    \ 'basic',
 \ ]
-" 	\ 'plugin',
-" 	\ 'keymap',
-" 	\ 'theme',
+"   \ 'plugin',
+"   \ 'keymap',
+"   \ 'theme',
 
 function SourceVim(path, name)
-	let l:name = a:name.'.vim'
-	let l:source_path = join([a:path, l:name], '/')
-	let l:source_path = fnameescape(l:source_path)
-	if !empty(glob(l:source_path))
-		execute 'source '.l:source_path
-	endif
+    let l:name = a:name.'.vim'
+    let l:source_path = join([a:path, l:name], '/')
+    let l:source_path = fnameescape(l:source_path)
+    if !empty(glob(l:source_path))
+        execute 'source '.l:source_path
+    endif
 endfunction
 
 function s:init()
-	for l:i in s:init_list
-		call SourceVim(s:init_path, l:i)
-	endfor
+    for l:i in s:init_list
+        call SourceVim(s:init_path, l:i)
+    endfor
 endfunction
 
 call <SID>init()
