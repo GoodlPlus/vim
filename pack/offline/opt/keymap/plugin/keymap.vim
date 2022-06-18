@@ -5,8 +5,10 @@
 " ------------------------------------------------------------------------------
 " Personal alt keymaps
 " ------------------------------------------------------------------------------
-call keymap#init_meta()
-delfunction keymap#init_meta
+if !has('nvim') && !has('gui_running')
+    call keymap#init_meta(1)
+    delfunction keymap#init_meta
+endif
 
 " ------------------------------------------------------------------------------
 " Personal tab keymaps
