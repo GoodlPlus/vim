@@ -26,7 +26,7 @@ set fileformats=unix,dos,mac
 " set undofile
 " set backupdir
 " set viewdir
-" set swapfile
+set swapfile
 " set undodir=g:homepath/undodir
 
 " Set spell check
@@ -70,6 +70,7 @@ set tabstop=4
 " set smarttab
 set softtabstop=4 " Space
 " set shiftround
+set cinoptions+=g0
 
 set list
 " set listchars=multispace:\╏\ ,
@@ -168,8 +169,6 @@ augroup auto_remove_trailing_spaces_and_lines
         \ | call cursor(b:last_pos)
         \ | unlet b:last_pos
 augroup END
-"         \ | silent %s/\%^\_s*//e
-"         \ | silent %s/\_s*\%$//e
 
 function s:remove_trailing_lines()
     let l:first_line = line('^')
