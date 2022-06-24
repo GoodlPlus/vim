@@ -57,7 +57,7 @@ nnoremap <Leader>h <Cmd>LeaderfHelp<CR>
 nnoremap <Leader>b <Cmd>LeaderfBuffer<CR>
 nnoremap <Leader>m <Cmd>LeaderfMru<CR>
 " nnoremap <Leader>t <Cmd>LeaderfBufTag<CR>
-nnoremap <Leader>/ <Cmd>LeaderfLine<CR>
+nnoremap <Leader>/ :Leaderf! rg -e<Space>
 
 " nnoremap <silent><nowait> <Leader>* :<C-u><C-r>=printf('Leaderf! rg --current-buffer -e %s', expand('<cword>'))<CR><CR>
 noremap <Leader>* :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
