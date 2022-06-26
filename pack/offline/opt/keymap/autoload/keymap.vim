@@ -11,6 +11,7 @@ endif
 " Personal alt keymaps
 " https://zhuanlan.zhihu.com/p/20902166
 " https://skywind3000.com/blog/archives/1846/
+" https://github.com/skywind3000/vim/blob/9002b44618c7aa24f19595739996cdee8eddb5f5/plugin/altmeta.vim
 " ------------------------------------------------------------------------------
 function keymap#init_meta(mode) abort
     function s:set_meta_key(mode, key)
@@ -20,28 +21,21 @@ function keymap#init_meta(mode) abort
             execute "set <M-".a:key.">=\e]{0}".a:key."~"
         endif
     endfunc
+    let l:array = [')', '!', '@', '#', '$', '%', '^', '&', '*', '(']
     for i in range(10)
         call <SID>set_meta_key(a:mode, nr2char(char2nr('0') + i))
+        call <SID>set_meta_key(a:mode, l:array[i])
     endfor
     for i in range(26)
         call <SID>set_meta_key(a:mode, nr2char(char2nr('a') + i))
         call <SID>set_meta_key(a:mode, nr2char(char2nr('A') + i))
     endfor
-    if a:mode != 0
-        for c in [',', '.', '/', ';', '[', ']', '{', '}']
-            call <SID>set_meta_key(a:mode, c)
-        endfor
-        for c in ['?', ':', '-', '_']
-            call <SID>set_meta_key(a:mode, c)
-        endfor
-    else
-        for c in [',', '.', '/', ';', '{', '}']
-            call <SID>set_meta_key(a:mode, c)
-        endfor
-        for c in ['?', ':', '-', '_']
-            call <SID>set_meta_key(a:mode, c)
-        endfor
-    endif
+    for c in [',', '.', '/', ';', '[', ']', '-', '=', "'"]
+        call <SID>set_meta_key(a:mode, c)
+    endfor
+    for c in ['?', ':', '{', '}', '_', '+']
+        call <SID>set_meta_key(a:mode, c)
+    endfor
     delfunction <SID>set_meta_key
 endfunction
 
@@ -150,6 +144,7 @@ function s:get_selected_text(visual_mode) abort
     return l:text
 endfunction
 
+" https://github.com/skywind3000/vim/blob/9002b44618c7aa24f19595739996cdee8eddb5f5/plugin/search_plus.vim
 function keymap#visual_secetion_search(visual_mode) abort
     let l:text = s:get_selected_text(a:visual_mode)
     let l:pattern = escape(l:text, "\\/.*'$^~[]")
@@ -187,6 +182,7 @@ endfunction
 
 " ------------------------------------------------------------------------------
 " Personal comment
+" https://github.com/skywind3000/vim/blob/9002b44618c7aa24f19595739996cdee8eddb5f5/plugin/commentary.vim
 " ------------------------------------------------------------------------------
 function keymap#comment() abort
     if index(["vim"], &filetype) >= 0
