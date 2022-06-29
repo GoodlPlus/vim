@@ -169,9 +169,9 @@ function keymap#compile_run() abort
     let l:splitbelow = &splitbelow
     set splitbelow
     if &filetype == 'c'
-        terminal ++shell gcc -Wall -std=c18 % -o %< && time ./%< && rm ./%<
+        terminal ++shell gcc -Wall -Wextra -std=c18 % -o %< && time ./%< && rm ./%<
     elseif &filetype == 'cpp'
-        terminal ++shell g++ -Wall -std=c++20 % -o %< && time ./%< && rm ./%<
+        terminal ++shell g++ -Wall -Wextra -std=c++20 % -o %< && time ./%< && rm ./%<
     elseif &filetype == 'python'
         terminal ++shell time python3 %
     elseif &filetype == 'vim'
