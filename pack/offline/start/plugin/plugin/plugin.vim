@@ -24,5 +24,6 @@ Plugin 'https://github.com/skywind3000/vim-quickui'
 Plugin 'translator'
 Plugin 'view'
 Plugin 'sync'
+Plugin 'format'
 
 call plugin#load_plugin_all()
