@@ -55,9 +55,11 @@ def OutCallback(channel: channel, message: string)
 enddef
 
 def ErrCallback(channel: channel, message: string)
-    echomsg 'Format Error => ' .. message
     var channel_info = ch_info(channel)
     var channel_id = channel_info['id']
+    var buffer_name = channel_to_buffer[channel_id]
+    var full_file_name = fnamemodify(buffer_name, ':~')
+    echohl ErrorMsg | echomsg 'Failed to Format ' .. full_file_name .. ' => ' .. message
 
     Clean(channel_id, format_info, channel_to_buffer)
 enddef
@@ -74,7 +76,8 @@ def ExitCallback(job: job, ret: number)
 
     var start_time = info['start_time']
     var format_time = split(reltimestr(reltime(start_time)))[0]
-    echomsg 'Format Successfully => ' .. format_time .. 's'
+    var full_file_name = fnamemodify(buffer_name, ':~')
+    echohl WarningMsg | echo 'Successfully Format ' .. full_file_name .. ' => ' .. format_time .. 's'
 
     Clean(channel_id, format_info, channel_to_buffer)
 enddef
@@ -166,6 +169,31 @@ def GetBlackFormatCmd(info: dict<any>): list<any>
     ]
     return cmd
 enddef
+
+# info['index'] = 0
+def Overwrite(info: dict<any>, formatted_line)
+    var index = info['index']
+    var start_line = info['start_line']
+    var end_line = info['end_line']
+    var buffer_name = info['buffer_name']
+    if index < start_line
+        return
+    else
+        var original_line = getbufline(buffer_name, info['index'])
+        if original_line != formatted_line
+            setbufline(buffer_name, index, formatted_line)
+        endif
+
+        if index
+    elseif index > end_line
+        appendbufline(buffer_name, index, formatted_line)
+    else
+        if original_line != formatted_line
+            setbufline(buffer_name, index, formatted_line)
+        endif
+    endif
+enddef
+
 
 def Overwrite(info: dict<any>)
     var buffer_name = info['buffer_name']
