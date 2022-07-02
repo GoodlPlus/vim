@@ -187,7 +187,7 @@ endfunction
 "     autocmd!
 "     auto BufReadPost
 "                 \ * if &modifiable
-"                 \ | retab!
+"                 \ | retab
 "     "             \ | exe "set ul=-1 | e! | set ul=" . &ul
 "                 \ | endif
 "     auto BufWritePre * set expandtab | retab!
