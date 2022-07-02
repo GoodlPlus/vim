@@ -212,6 +212,7 @@ let s:highlight_config =
     \ 'TabLineFill':        [{'NONE': 1}, {'guifg': s:Fill['guifg'], 'guibg': s:Fill['guibg']}],
     \ 'LineNr':             [{'NONE': 0}, {'guifg': s:Default['guifg']}],
     \ 'CursorLineNr':       [{'NONE': 0}, {'guifg': s:Seletect['guifg']}],
+    \ 'SuccessMsg':       [{'NONE': 0}, {'cterm': 'bold', 'ctermfg': '142', 'gui': 'bold', 'guifg': '#b8bb26'}],
 \ }
 "     \
 "     \ 'SpellBad':           [{'NONE': 1}, {'cterm': 'underline'}],
