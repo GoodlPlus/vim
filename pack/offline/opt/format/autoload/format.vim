@@ -310,7 +310,7 @@ def GetBlackFormatCmd(info: dict<any>): list<any>
     [
         'black',
         '-',
-        '--line-length=88',
+        '--line-length=100',
         '--quiet',
     ]
     return cmd
