@@ -74,7 +74,9 @@ set cinoptions+=g0
 
 set list
 " set listchars=multispace:\╏\ ,
-set listchars=multispace:\╏\ \ \ ,
+if has("patch-8.2.5067")
+    set listchars=multispace:\╏\ \ \ ,
+endif
 " set listchars=tab:\ￜ\
 " set listchars=tab:\❙\
 " set listchars=tab:\ﺍ\
