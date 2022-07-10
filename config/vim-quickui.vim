@@ -38,6 +38,14 @@ call quickui#menu#install('H&elp', [
             \ ['&Summary', 'help summary', ''],
             \ ], 10000)
 
+" VimTex
+call quickui#menu#install('V&imTex', [
+            \ ["&Compile", 'VimtexCompile'],
+            \ ["&Clean", 'VimtexClean'],
+            \ ["&Errors", 'VimtexErrors'],
+            \ ["&Info", 'VimtexInfo'],
+            \ ], '<auto>', 'tex')
+
 " enable to display tips in the cmdline
 let g:quickui_show_tip = 1
 let g:quickui_color_scheme = 'gruvbox'
