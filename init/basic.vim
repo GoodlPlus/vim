@@ -171,6 +171,7 @@ augroup auto_remove_trailing_spaces_and_lines
         \ | unlet b:last_pos
 augroup END
 
+
 function s:remove_trailing_lines()
     let l:first_line = line('^')
     let l:first_non_blank_line = nextnonblank(l:first_line)
@@ -183,6 +184,7 @@ function s:remove_trailing_lines()
         call deletebufline('%', l:last_non_blank_line + 1, l:last_line)
     endif
 endfunction
+
 
 " augroup auto_retab
 "     autocmd!
