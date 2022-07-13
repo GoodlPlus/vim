@@ -62,15 +62,14 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 " Set indent width
-set autoindent " Default on
+" set autoindent " Default on
 set shiftwidth=4
-set cindent "Default on
+" set cindent "Default on
 set expandtab " Space
 set tabstop=4
 " set smarttab
 set softtabstop=4 " Space
-" set shiftround
-set cinoptions+=g0
+set shiftround
 
 set list
 " set listchars=multispace:\╏\ ,
