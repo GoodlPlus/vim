@@ -62,15 +62,14 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 " Set indent width
-set autoindent " Default on
+" set autoindent " Default on
 set shiftwidth=4
-set cindent "Default on
+" set cindent "Default on
 set expandtab " Space
 set tabstop=4
 " set smarttab
 set softtabstop=4 " Space
-" set shiftround
-set cinoptions+=g0
+set shiftround
 
 set list
 " set listchars=multispace:\╏\ ,
@@ -172,6 +171,7 @@ augroup auto_remove_trailing_spaces_and_lines
         \ | unlet b:last_pos
 augroup END
 
+
 function s:remove_trailing_lines()
     let l:first_line = line('^')
     let l:first_non_blank_line = nextnonblank(l:first_line)
@@ -184,6 +184,7 @@ function s:remove_trailing_lines()
         call deletebufline('%', l:last_non_blank_line + 1, l:last_line)
     endif
 endfunction
+
 
 " augroup auto_retab
 "     autocmd!
