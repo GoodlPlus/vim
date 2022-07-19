@@ -2,32 +2,81 @@ vim9script
 
 # https://hzhu212.github.io/posts/2c63bd16/
 const style = join([fnameescape(expand('<sfile>:p:h')), '../utils/.clang-format'], '/')
-const visual_mode = {'v': 0, 'V': 0, "\<Ctrl-v>": 0}
+const visual_mode = ['v', 'V', "\<C-V>"]
 var format_info = {}
 var channel_to_buffer = {}
 var filetype_to_format =
 {
-    'c': {'format': 'clang-format'},
-    'cpp': {'format': 'clang-format'},
-    'h': {'format': 'clang-format'},
-    'hpp': {'format': 'clang-format'},
-    'python': {'format': ['black', 'isort'], 'visual_mode': v:false},
+    'c': {'format': 'clang-format', 'mode': ['n', 'V']},
+    'cpp': {'format': 'clang-format', 'mode': ['n', 'V']},
+    'h': {'format': 'clang-format', 'mode': ['n', 'V']},
+    'hpp': {'format': 'clang-format', 'mode': ['n', 'V']},
+    'python': {'format': ['black', 'isort'], 'mode': ['n']},
 }
+
+def GetClangFormatCmd(info: dict<any>): list<any>
+    var cmd =
+    [
+        'clang-format',
+        '-style=file:' .. style,
+        # '-style="{BasedOnStyle: llvm, IndentWidth: 4, BreakBeforeBraces: Allman, ColumnLimit: 88}"'
+        '--lines=' .. info['start_line'] .. ':' .. info['end_line'],
+        '--cursor=' .. info['original_byte'],
+        '--assume-filename=' .. info['file_name'],
+    ]
+    return cmd
+enddef
+
+def GetBlackFormatCmd(info: dict<any>): list<any>
+    var cmd =
+    [
+        'black',
+        '-',
+        '--line-length=100',
+        '--quiet',
+    ]
+    return cmd
+enddef
 
 # Error!
 def Pos2Byte(row: number, col: number): number
     return line2byte(row) + col - 1
 enddef
 
+def PositionToOffset(buffer_name: string, row: number, col: number): number
+    var offset = col # 1-based to 0-based
+    if row > 1
+        for i in range(1, row - 1) # 1-based to 0-based, exclude current
+            offset += len(getbufline(buffer_name, i)[0]) + 1 # +1 for newline
+        endfor
+    endif
+    return offset
+enddef
+
 def StartJob(buffer_name: string, cmd: list<any>)
-    var callback =
-    {
-        'err_cb': ErrCallback,
-        'close_cb': CloseCallback,
-        'exit_cb': ExitCallback,
-        'in_io': 'buffer',
-        'in_name': buffer_name,
-    }
+    var buffer_info = format_info[buffer_name]
+    var info = buffer_info[-1]
+    var overwrite = info['overwrite']
+    var callback: dict<any>
+    if overwrite == 'all'
+        callback =
+        {
+            'err_cb': ErrCallback,
+            'close_cb': CloseCallback,
+            'exit_cb': ExitCallback,
+            'in_io': 'buffer',
+            'in_name': buffer_name,
+        }
+    elseif overwrite == 'each'
+        callback =
+        {
+            'err_cb': ErrCallback,
+            'out_cb': OutCallback,
+            'exit_cb': ExitCallback,
+            'in_io': 'buffer',
+            'in_name': buffer_name,
+        }
+    endif
     var job = job_start(cmd, callback)
     var job_info = job_info(job)
     var channel = job_getchannel(job)
@@ -46,6 +95,18 @@ def ErrCallback(channel: channel, message: string)
     echohl ErrorMsg
     echomsg message
     echohl None
+enddef
+
+def OutCallback(channel: channel, message: string)
+    var channel_info = ch_info(channel)
+    var channel_id = channel_info['id']
+    echomsg message
+    var buffer_name = channel_to_buffer[channel_id]
+    var buffer_info = format_info[buffer_name]
+    var info = buffer_info[-1]
+
+    OverwriteEachLine(info, message)
+    ++info['index']
 enddef
 
 def CloseCallback(channel: channel)
@@ -85,6 +146,9 @@ def ExitCallback(job: job, ret: number)
     var echo_message: string
 
     if ret == 0 && len(formats) > 0
+        if info['overwrite'] == 'each'
+            DeleteTrailingLines(info)
+        endif
         GoFormat(buffer_name, formats)
         return
     else
@@ -106,25 +170,23 @@ def ExitCallback(job: job, ret: number)
 
     if mode == 'n'
         GoBackCursor(info)
-    elseif has_key(visual_mode, mode)
+    elseif index(visual_mode, mode) != -1
         SelectFormattedLines(info)
     endif
+
     Clean(channel_id, format_info, channel_to_buffer)
 enddef
 
 def GoBackCursor(info: dict<any>)
     var buffer_name = info['buffer_name']
     if buffer_name == bufname('%')
-        if info['format'] == 'clang'
+        if info['format'] == 'clang-format'
             execute 'goto ' .. info['formatted_byte']
         endif
     endif
 enddef
 
 def SelectFormattedLines(info: dict<any>)
-    if !has_key(visual_mode, info['mode'])
-        return
-    endif
     var buffer_name = info['buffer_name']
     var start_line = info['start_line']
     var end_line = info['end_line']
@@ -155,7 +217,8 @@ export def Format()
     endif
 
     var format_dict = deepcopy(filetype_to_format[filetype])
-    if has_key(visual_mode, mode) && has_key(format_dict, 'visual_mode') && !format_dict['visual_mode']
+    var supported_mode = format_dict['mode']
+    if index(supported_mode, mode) == -1
         return
     endif
 
@@ -254,6 +317,32 @@ def OverwriteAllLines(info: dict<any>, formatted_lines: list<string>)
     endif
 enddef
 
+def OverwriteEachLine(info: dict<any>, formatted_line: string)
+    var index = info['index']
+    var buffer_name = info['buffer_name']
+    if index == 0 && info['format'] == 'clang-format'
+        var header = formatted_line
+        var header_dict = json_decode(header)
+        info['formatted_byte'] = header_dict["Cursor"]
+        return
+    elseif index < info['start_line']
+        return
+    elseif index > info['last_line']
+        appendbufline(buffer_name, index - 1, formatted_line)
+    else
+        setbufline(buffer_name, index, formatted_line)
+    endif
+enddef
+
+def DeleteTrailingLines(info: dict<any>)
+    var index = info['index']
+    var last_line = info['last_line']
+    var buffer_name = info['buffer_name']
+    if index <= last_line
+        deletebufline(buffer_name, index, last_line)
+    endif
+enddef
+
 def GetFormatInfo(buffer_name: string, info: dict<any>)
     info['start_time'] = reltime()
     info['buffer_name'] = buffer_name
@@ -263,9 +352,14 @@ def GetFormatInfo(buffer_name: string, info: dict<any>)
     info['cursor'] = getcurpos(bufwinid(buffer_name))
     info['status'] = v:true
     if info['mode'] == 'n'
+        info['overwrite'] = 'all'
+    elseif index(visual_mode, info['mode']) != -1
+        info['overwrite'] = 'all'
+    endif
+    if info['mode'] == 'n'
         info['start_line'] = 1
         info['end_line'] = line('$')
-    elseif has_key(visual_mode, info['mode'])
+    elseif index(visual_mode, info['mode']) != -1
         if line('.') > line('v')
             info['reverse'] = v:false
         elseif line('.') < line('v')
@@ -286,34 +380,11 @@ def GetClangFormatInfo(buffer_name: string, info: dict<any>)
     var cursor = info['cursor']
     info['index'] = 0
     info['original_byte'] = Pos2Byte(cursor[1], cursor[2])
-enddef
-
-def GetClangFormatCmd(info: dict<any>): list<any>
-    var cmd =
-    [
-        'clang-format',
-        '-style=file:' .. style,
-        # '-style="{BasedOnStyle: llvm, IndentWidth: 4, BreakBeforeBraces: Allman, ColumnLimit: 88}"'
-        '--lines=' .. info['start_line'] .. ':' .. info['end_line'],
-        '--cursor=' .. info['original_byte'],
-        '--assume-filename=' .. info['file_name'],
-    ]
-    return cmd
+    # info['original_byte'] = PositionToOffset(buffer_name, cursor[1], cursor[2])
 enddef
 
 def GetBlackFormatInfo(buffer_name: string, info: dict<any>)
     info['index'] = 1
-enddef
-
-def GetBlackFormatCmd(info: dict<any>): list<any>
-    var cmd =
-    [
-        'black',
-        '-',
-        '--line-length=100',
-        '--quiet',
-    ]
-    return cmd
 enddef
 
 def GetIsortFormatInfo(buffer_name: string, info: dict<any>)
