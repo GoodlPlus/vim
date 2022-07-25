@@ -30,10 +30,11 @@ function keymap#init_meta(mode) abort
         call <SID>set_meta_key(a:mode, nr2char(char2nr('a') + i))
         call <SID>set_meta_key(a:mode, nr2char(char2nr('A') + i))
     endfor
-    for c in [',', '.', '/', ';', '[', ']', '-', '=', "'"]
+    for c in [',', '.', '/', ';', "'", '[', ']', '\', '-', '=', '`']
         call <SID>set_meta_key(a:mode, c)
     endfor
-    for c in ['?', ':', '{', '}', '_', '+']
+    " ['<', '>', '?', ':', '{', '}', '|', '_', '+', '~']
+    for c in ['<', '?', ':', '{', '}', '_', '+', '~']
         call <SID>set_meta_key(a:mode, c)
     endfor
     delfunction <SID>set_meta_key
