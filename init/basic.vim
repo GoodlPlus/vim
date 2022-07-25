@@ -7,6 +7,24 @@
 
 syntax enable
 filetype plugin indent on
+
+" Set cursor shape
+" See https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+let &t_SI = "\e[6 q" "SI = INSERT mode
+let &t_SR = "\e[4 q" "SR = REPLACE mode
+let &t_EI = "\e[2 q" "EI = NORMAL mode (ELSE)
+" Enable undercurls in terminal
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+" Enable underline colors (ANSI), see alacritty #4660
+let &t_AU = "\e[58;5;%dm"
+" Enable true color
+let &t_8u = "\e[58;2;%lu;%lu;%lum"
+if &term =~# '^\(tmux\|screen\|st\|alacritty\)'
+    let &t_8f = "\e[38;2;%lu;%lu;%lum"
+    let &t_8b = "\e[48;2;%lu;%lu;%lum"
+endif
+
 set termguicolors
 set background=dark
 
@@ -51,15 +69,6 @@ set regexpengine=1
 " Highlight current line
 set cursorlineopt=number cursorline
 set fillchars=eob:\ ,
-
-" Set cursor shape
-" See https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
-let &t_SI = "\e[6 q" "SI = INSERT mode
-let &t_SR = "\e[4 q" "SR = REPLACE mode
-let &t_EI = "\e[2 q" "EI = NORMAL mode (ELSE)
-" Enable undercurl
-let &t_Cs = "\e[4:3m"
-let &t_Ce = "\e[4:0m"
 
 " Set indent width
 " set autoindent " Default on
@@ -107,6 +116,11 @@ set laststatus=2
 " Screen will not be redrawn
 set lazyredraw
 set ttyfast
+set belloff=all
+
+if $TERM == 'alacritty'
+    set ttymouse=sgr
+endif
 
 set wildmenu
 set pumheight=10

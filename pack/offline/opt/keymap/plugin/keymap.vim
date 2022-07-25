@@ -110,8 +110,7 @@ nnoremap <Leader>5 <Cmd>call keymap#compile_run()<CR>
 " ------------------------------------------------------------------------------
 " Personal comment
 " ------------------------------------------------------------------------------
-noremap <C-_> :call keymap#comment()<CR>
-noremap <C-?> :call keymap#comment()<CR>
+noremap <Leader>c :call keymap#comment()<CR>
 
 " ------------------------------------------------------------------------------
 " smooth_scroll
