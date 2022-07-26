@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/Users/ljh/.config/alacritty'
+let g:netrw_dirhist_7='/Users/ljh/format'
+let g:netrw_dirhist_6='/Users/ljh/.config/iterm2'
+let g:netrw_dirhist_5='/Users/ljh/.config'
+let g:netrw_dirhist_4='/Users/ljh/Desktop'
+let g:netrw_dirhist_3='/Users/ljh/.config/clash'
+let g:netrw_dirhist_2='/Users/ljh/Documents/code/python/test'
+let g:netrw_dirhist_1='/Users/ljh/.vim/ftplugin'
