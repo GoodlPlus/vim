@@ -54,6 +54,10 @@ set spell
 set number
 set relativenumber
 set signcolumn=number
+set nocursorcolumn
+set cursorlineopt=number cursorline
+set fillchars=eob:\ ,
+
 " set foldcolumn=1
 " set numberwidth=5
 set scrolloff=5
@@ -65,10 +69,6 @@ set sidescrolloff=5
 
 set synmaxcol=256
 set regexpengine=1
-
-" Highlight current line
-set cursorlineopt=number cursorline
-set fillchars=eob:\ ,
 
 " Set indent width
 " set autoindent " Default on
@@ -145,10 +145,12 @@ set viminfo=%,'999,/999,:999,<999999,@999,c,f1,s1024,
 " set timeout " Default on
 set timeoutlen=500
 set ttimeout
-if $TMUX != ""
-    set ttimeoutlen=10
-elseif &ttimeoutlen > 50 || &ttimeoutlen <= 0
-    set ttimeoutlen=50
+if !empty($TMUX) " In TMUX
+    set ttimeoutlen=5
+elseif !empty($SSH_CLIENT) || !empty($SSH_TTY) " Not in TMUX but in SSH
+    set ttimeoutlen=30
+else " Not in TMUX and not in SSH
+    set ttimeoutlen=5
 endif
 
 
