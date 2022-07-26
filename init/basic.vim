@@ -145,6 +145,7 @@ set viminfo=%,'999,/999,:999,<999999,@999,c,f1,s1024,
 " set timeout " Default on
 set timeoutlen=500
 set ttimeout
+" https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-controlled-from-ssh
 if !empty($TMUX) " In TMUX
     set ttimeoutlen=5
 elseif !empty($SSH_CLIENT) || !empty($SSH_TTY) " Not in TMUX but in SSH
