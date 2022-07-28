@@ -13,7 +13,8 @@ Plugin 'matchit'
 " Plugin 'https://github.com/Yggdroot/indentLine'
 " Plugin 'https://github.com/morhetz/gruvbox'
 Plugin 'https://github.com/sainnhe/gruvbox-material'
-" Plugin 'https://github.com/tomasiser/vim-code-dark'
+Plugin 'https://github.com/sainnhe/edge'
+Plugin 'https://github.com/sainnhe/everforest'
 Plugin 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'https://github.com/Yggdroot/LeaderF', {'cmd': 'LeaderfInstallCExtension'}
 " Plugin 'https://github.com/tamago324/LeaderF-filer'
