@@ -1,5 +1,5 @@
-" let g:gruvbox_material_foreground = "material"
-let g:gruvbox_material_foreground = "original"
+" let g:gruvbox_material_foreground = "original"
+let g:gruvbox_material_foreground = "material"
 let g:gruvbox_material_background = "hard"
 let g:gruvbox_material_disable_italic_comment = 0
 let g:gruvbox_material_enable_bold = 1
@@ -16,5 +16,9 @@ let g:gruvbox_material_diagnostic_text_highlight = 1
 let g:gruvbox_material_diagnostic_line_highlight = 0
 let g:gruvbox_material_diagnostic_virtual_text = "colored"
 let g:gruvbox_material_current_word = "grey background"
-let g:gruvbox_material_disable_terminal_colors = 0
+let g:gruvbox_material_disable_terminal_colors = 1
 let g:gruvbox_material_better_performance = 1
+
+let g:Default = {'guifg': '#a89984', 'guibg': '#1d2021'}
+let g:Seletect = {'guifg': '#d4be98', 'guibg': '#3c3836'}
+let g:Fill = {'guifg': 'NONE', 'guibg': 'NONE'}
