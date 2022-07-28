@@ -198,21 +198,22 @@ let s:file_palette =
 " ------------------------------------------------------------------------------
 " Highlight Config
 " ------------------------------------------------------------------------------
-let s:Default = {'guifg': '#a89984', 'guibg': '#1d2021'}
-let s:Seletect = {'guifg': '#ebdbb2', 'guibg': '#3c3836'}
-let s:Fill = {'guifg': 'NONE', 'guibg': 'NONE'}
+let s:Default = g:Default
+let s:Seletect = g:Seletect
+let s:Fill = g:Fill
 
 let s:highlight_config =
 \ {
-    \ 'StatusLine':         [{'NONE': 1}, {'guifg': s:Seletect['guifg'], 'guibg': s:Seletect['guibg']}],
-    \ 'StatusLineNC':       [{'NONE': 1}, {'guifg': s:Default['guifg'], 'guibg': s:Default['guibg']}],
-    \ 'StatusLineFill':       [{'NONE': 1}, {'guifg': s:Fill['guifg'], 'guibg': s:Fill['guibg']}],
-    \ 'TabLine':            [{'NONE': 1}, {'guifg': s:Default['guifg'], 'guibg': s:Default['guibg']}],
-    \ 'TabLineSel':         [{'NONE': 1}, {'guifg': s:Seletect['guifg'], 'guibg': s:Seletect['guibg']}],
-    \ 'TabLineFill':        [{'NONE': 1}, {'guifg': s:Fill['guifg'], 'guibg': s:Fill['guibg']}],
-    \ 'LineNr':             [{'NONE': 0}, {'guifg': s:Default['guifg']}],
-    \ 'CursorLineNr':       [{'NONE': 0}, {'guifg': s:Seletect['guifg']}],
-    \ 'SuccessMsg':       [{'NONE': 0}, {'cterm': 'bold', 'ctermfg': '142', 'gui': 'bold', 'guifg': '#b8bb26'}],
+    \ 'StatusLine':    [{'NONE': 1}, {'guifg': s:Seletect['guifg'], 'guibg': s:Seletect['guibg']}],
+    \ 'StatusLineNC':  [{'NONE': 1}, {'guifg': s:Default['guifg'], 'guibg': s:Default['guibg']}],
+    \ 'StatusLineFill':[{'NONE': 1}, {'guifg': s:Fill['guifg'], 'guibg': s:Fill['guibg']}],
+    \ 'TabLine':       [{'NONE': 1}, {'guifg': s:Default['guifg'], 'guibg': s:Default['guibg']}],
+    \ 'TabLineSel':    [{'NONE': 1}, {'guifg': s:Seletect['guifg'], 'guibg': s:Seletect['guibg']}],
+    \ 'TabLineFill':   [{'NONE': 1}, {'guifg': s:Fill['guifg'], 'guibg': s:Fill['guibg']}],
+    \ 'LineNr':        [{'NONE': 1}, {'guifg': s:Default['guifg']}],
+    \ 'CursorLineNr':  [{'NONE': 1}, {'guifg': s:Seletect['guifg']}],
+    \ 'Cursor':        [{'NONE': 1}, {'guibg': s:Seletect['guifg']}],
+    \ 'SuccessMsg':    [{'NONE': 1}, {'cterm': 'bold', 'ctermfg': '142', 'gui': 'bold', 'guifg': '#b8bb26'}],
 \ }
 "     \
 "     \ 'SpellBad':           [{'NONE': 1}, {'cterm': 'underline'}],
