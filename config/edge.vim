@@ -1,0 +1,15 @@
+let g:edge_style = 'aura'
+let g:edge_dim_foregroud = 0
+let g:edge_disable_italic_comment = 0
+let g:edge_enable_italic = 1
+let g:edge_cursor = 'auto'
+let g:edge_transparent_background = 0
+let g:edge_menu_selection_background = 'blue'
+let g:edge_spell_foreground = 'none'
+let g:edge_show_eob = 1
+let g:edge_diagnostic_text_highlight = 1
+let g:edge_diagnostic_line_highlight = 0
+let g:edge_diagnostic_virtual_text = 'colored'
+let g:edge_current_word = 'grey background'
+let g:gruvbox_material_disable_terminal_colors = 0
+let g:edge_better_performance = 1
