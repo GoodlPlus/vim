@@ -1,3 +1,5 @@
+" colorscheme everforest
+" colorscheme edge
 colorscheme gruvbox-material
 
 " ------------------------------------------------------------------------------
