@@ -11,11 +11,9 @@ let g:Lf_WildIgnore =
     \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
 \ }
 let g:Lf_MruMaxFiles = 999
-" let g:Lf_DisableStl = 1
 let g:Lf_DisableStl = 0
 " let g:Lf_StlColorscheme = 'gruvbox_material'
 let g:Lf_StlSeparator = {'left': '', 'right': ''}
-" let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_NormalMap =
 \ {
     \ "File": [["<nowait> <ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
@@ -29,7 +27,7 @@ let g:Lf_NormalMap =
     \ "Gtags": [["<nowait> <ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
 \ }
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn']
-let g:Lf_WorkingDirectoryMode = 'a'
+let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_PreviewResult =
 \ {
     \ 'File': 0,
@@ -56,8 +54,13 @@ let g:Lf_PopupShowFoldcolumn = 0
 nnoremap <Leader>h <Cmd>LeaderfHelp<CR>
 nnoremap <Leader>b <Cmd>LeaderfBuffer<CR>
 nnoremap <Leader>m <Cmd>LeaderfMru<CR>
-" nnoremap <Leader>t <Cmd>LeaderfBufTag<CR>
-nnoremap <Leader>/ :Leaderf! rg -e<Space>
+nnoremap <Leader>i <Cmd>LeaderfBufTag!<CR>
+nnoremap <Leader>I <Cmd>LeaderfBufTagAll!<CR>
+nnoremap <Leader>o <Cmd>LeaderfFunction!<CR>
+nnoremap <Leader>O <Cmd>LeaderfFunctionAll!<CR>
+nnoremap <Leader>/ <Cmd>LeaderfLine<CR>
+nnoremap <Leader>? <Cmd>LeaderfLineAll<CR>
+nnoremap <Leader>s :Leaderf! rg -e<Space>
 
 " nnoremap <silent><nowait> <Leader>* :<C-u><C-r>=printf('Leaderf! rg --current-buffer -e %s', expand('<cword>'))<CR><CR>
 noremap <Leader>* :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
