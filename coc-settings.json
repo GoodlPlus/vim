@@ -1,5 +1,6 @@
 {
     "suggest.autoTrigger": "none",
+    "suggest.noselect": true,
     "clangd.fallbackFlags": [ "-Wall", "-Wextra", "-std=c++20" ],
     "semanticTokens.filetypes": ["*"]
 }
