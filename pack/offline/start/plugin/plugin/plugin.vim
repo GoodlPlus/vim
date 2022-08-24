@@ -23,6 +23,7 @@ Plugin 'https://github.com/lervag/vimtex'
 Plugin 'https://github.com/vim-python/python-syntax'
 Plugin 'https://github.com/skywind3000/vim-quickui'
 Plugin 'https://github.com/tpope/vim-commentary'
+Plugin 'https://github.com/michaeljsmith/vim-indent-object'
 
 Plugin 'translator'
 Plugin 'view'
