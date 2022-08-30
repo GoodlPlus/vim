@@ -123,6 +123,7 @@ if $TERM == 'alacritty'
 endif
 
 set wildmenu
+set wildoptions=pum
 set pumheight=10
 
 set complete+=kspell
