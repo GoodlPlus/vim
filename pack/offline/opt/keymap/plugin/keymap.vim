@@ -89,7 +89,8 @@ vnoremap <silent> # :<C-u>call keymap#visual_secetion_search(visualmode()) \| le
 vnoremap <silent> * :<C-u>call keymap#visual_secetion_search(visualmode()) \| let v:hlsearch = 1\| let v:searchforward = 1<CR>
 
 " search in very magic mode
-nnoremap / //\v
+nnoremap / /\v
+nnoremap ? ?\v
 
 " Search in selected region
 vnoremap / <Esc>/\%V
