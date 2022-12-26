@@ -3,5 +3,6 @@
     "suggest.noselect": true,
     "clangd.fallbackFlags": [ "-Wall", "-Wextra", "-std=c++20" ],
     "semanticTokens.filetypes": ["*"],
-    "pyright.inlayHints.enable": false
+    "pyright.inlayHints.variableTypes": false,
+    "pyright.inlayHints.functionReturnTypes": false
 }
