@@ -18,8 +18,8 @@ function translator#translate_exit_cb(channel, message) abort
     call popup_atcursor(s:info, {'pos':'botleft', 'line': 'cursor-1', 'col': 'cursor'})
 endfunction
 
-function translator#get_selected_text(visual_mode) abort
-    if a:visual_mode == ''
+function translator#get_selected_text(mode) abort
+    if a:mode == 'n'
         let l:text = expand('<cword>')
     else
         let [l:line_start, l:column_start] = [line("'<"), col("'<")]
@@ -36,9 +36,10 @@ function translator#get_selected_text(visual_mode) abort
     return l:text
 endfunction
 
-function translator#start(visual_mode, args) abort
-    let l:args = split(a:args)
-    let l:text = translator#get_selected_text(a:visual_mode)
+function translator#start(args) abort
+    let l:mode = a:args[0]
+    let l:args = split(a:args[1:])
+    let l:text = translator#get_selected_text(l:mode)
     let l:callback =
     \ {
         \ 'out_cb': function('translator#translate_out_cb'),
@@ -48,7 +49,7 @@ function translator#start(visual_mode, args) abort
     let l:text = escape(l:text, '"')
     let l:cmd =
     \ [
-        \ 'python3',
+        \ 'python',
         \ s:translator_file,
         \ l:text,
     \ ]
