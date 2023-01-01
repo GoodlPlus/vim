@@ -58,6 +58,11 @@ command! -bang -nargs=0 -range MaximizerToggle :call keymap#toggle(<bang>0)
 "" Turn the current word into title case
 "inoremap <silent> <c-t> <Esc>b~lea
 
+" ------------------------------------------------------------------------------
+" make j and k better
+" ------------------------------------------------------------------------------
+nnoremap j gj
+nnoremap k gk
 
 " ------------------------------------------------------------------------------
 " Indent in visual mode
