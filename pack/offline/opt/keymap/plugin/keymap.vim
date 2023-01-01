@@ -61,8 +61,8 @@ command! -bang -nargs=0 -range MaximizerToggle :call keymap#toggle(<bang>0)
 " ------------------------------------------------------------------------------
 " make j and k better
 " ------------------------------------------------------------------------------
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
 
 " ------------------------------------------------------------------------------
 " Indent in visual mode
