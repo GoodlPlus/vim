@@ -1,10 +1,8 @@
 import argparse
 import hashlib
-import http.client
 import json
 import random
 import re
-import urllib
 
 import requests
 
@@ -67,23 +65,10 @@ class BaiduTranslator(Translator):
         self.key = "3cNk0RVkWbmmEEXeBft_"
 
     def request(self, url):
-        http_client = None
-        try:
-            http_client = http.client.HTTPConnection("api.fanyi.baidu.com", timeout=5)
-            http_client.request("GET", url)
+        response = requests.get(url)
+        ret = response.json()
+        print(ret["trans_result"][0]["dst"])
 
-            response = http_client.getresponse()
-            result_all = response.read().decode("utf-8")
-
-            result = json.loads(result_all)
-            print(result["trans_result"][0]["dst"])
-
-        except Exception as e:
-            print(e)
-
-        finally:
-            if http_client:
-                http_client.close()
 
     def translate(self, translate_type=""):
         param_dict = {
@@ -94,9 +79,10 @@ class BaiduTranslator(Translator):
             "salt": str(random.randint(32768, 65536)),
             "secretKey": self.key,
         }
+        url = "https://fanyi-api.baidu.com"
 
         if translate_type == "field":
-            url = "/api/trans/vip/fieldtranslate/?"
+            url += "/api/trans/vip/fieldtranslate/?"
             param_dict["domain"] = "electronics"
             sign = (
                 param_dict["appid"]
@@ -107,14 +93,13 @@ class BaiduTranslator(Translator):
             )
 
         else:
-            url = "/api/trans/vip/translate/?"
+            url += "/api/trans/vip/translate/?"
             sign = (
                 param_dict["appid"] + param_dict["q"] + param_dict["salt"] + param_dict["secretKey"]
             )
 
         param_dict["sign"] = hashlib.md5(sign.encode()).hexdigest()
         del param_dict["secretKey"]
-        param_dict["q"] = urllib.parse.quote_plus(param_dict["q"])
         url += self.join_param(param_dict)
 
         self.request(url)
@@ -138,25 +123,25 @@ class TencentTranslator(Translator):
             "secret_key": "",
         }
 
-        url = self.join_param(param_dict)
-        http_client = None
+        # url = self.join_param(param_dict)
+        # http_client = None
 
-        try:
-            http_client = http.client.HTTPSConnection("tmt.tencentcloudapi.com", timeout=5)
-            http_client.request("GET", url)
+        # try:
+        #     http_client = http.client.HTTPSConnection("tmt.tencentcloudapi.com", timeout=5)
+        #     http_client.request("GET", url)
 
-            response = http_client.getresponse()
-            result_all = response.read().decode("utf-8")
-            print(result_all)
+        #     response = http_client.getresponse()
+        #     result_all = response.read().decode("utf-8")
+        #     print(result_all)
 
-            result = json.loads(result_all)
+        #     result = json.loads(result_all)
 
-        except Exception as e:
-            print(e)
+        # except Exception as e:
+        #     print(e)
 
-        finally:
-            if http_client:
-                http_client.close()
+        # finally:
+        #     if http_client:
+        #         http_client.close()
 
 
 def get_args():
