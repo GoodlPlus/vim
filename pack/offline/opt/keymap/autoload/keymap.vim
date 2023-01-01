@@ -174,7 +174,7 @@ function keymap#compile_run() abort
     elseif &filetype == 'cpp'
         terminal ++shell g++ -Wall -Wextra -std=c++20 % -o %< && time ./%< && rm ./%<
     elseif &filetype == 'python'
-        terminal ++shell time python3 %
+        terminal ++shell time python %
     elseif &filetype == 'vim'
         execute 'source %'
     endif
