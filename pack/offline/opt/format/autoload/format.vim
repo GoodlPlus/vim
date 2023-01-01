@@ -1,5 +1,11 @@
 vim9script
 
+if exists('g:format_loaded')
+    finish
+else
+    g:format_loaded = 1
+endif
+
 # https://hzhu212.github.io/posts/2c63bd16/
 const style = join([fnameescape(expand('<sfile>:p:h')), '../utils/.clang-format'], '/')
 const visual_mode = ['v', 'V', "\<C-V>"]

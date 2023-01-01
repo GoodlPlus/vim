@@ -1,5 +1,11 @@
 vim9script
 
+if exists('g:IM_loaded')
+    finish
+else
+    g:IM_loaded = 1
+endif
+
 const default_IM = 'com.apple.keylayout.ABC'
 const selector = 'macism'
 var previous_IM = default_IM
