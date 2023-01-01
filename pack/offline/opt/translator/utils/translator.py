@@ -1,6 +1,7 @@
 import argparse
 import hashlib
 import json
+import os
 import random
 import re
 
@@ -158,6 +159,7 @@ def get_translator(args):
 
 
 if __name__ == "__main__":
+    os.environ["LC_ALL"] = "en_US.utf-8"
     args = get_args()
     translator = get_translator(args)(args)
     translator.translate()
