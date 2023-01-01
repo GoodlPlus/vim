@@ -29,5 +29,6 @@ Plugin 'translator'
 Plugin 'view'
 Plugin 'sync'
 Plugin 'format'
+Plugin 'IM'
 
 call plugin#load_plugin_all()
