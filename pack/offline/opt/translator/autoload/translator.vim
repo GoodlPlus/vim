@@ -49,7 +49,7 @@ function translator#start(args) abort
     let l:text = escape(l:text, '"')
     let l:cmd =
     \ [
-        \ 'python',
+        \ 'python3',
         \ s:translator_file,
         \ l:text,
     \ ]
