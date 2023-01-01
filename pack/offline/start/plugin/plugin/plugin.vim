@@ -29,6 +29,9 @@ Plugin 'translator'
 Plugin 'view'
 Plugin 'sync'
 Plugin 'format'
-Plugin 'IM'
+
+if empty($SSH_CLIENT) && empty($SSH_TTY) " Not in SSH but in local
+    Plugin 'IM'
+endif
 
 call plugin#load_plugin_all()
