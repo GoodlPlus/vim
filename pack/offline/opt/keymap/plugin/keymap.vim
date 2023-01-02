@@ -61,14 +61,16 @@ command! -bang -nargs=0 -range MaximizerToggle :call keymap#toggle(<bang>0)
 " ------------------------------------------------------------------------------
 " make j and k better
 " ------------------------------------------------------------------------------
-noremap j gj
-noremap k gk
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
 
 " ------------------------------------------------------------------------------
 " Indent in visual mode
 " ------------------------------------------------------------------------------
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
 
 " ------------------------------------------------------------------------------
@@ -90,16 +92,16 @@ noremap X "_X
 " Visual mode pressing * or # searches for the current selection
 nnoremap # <Cmd>call keymap#visual_secetion_search('') \| let v:hlsearch = 1 \| let v:searchforward = 0<CR>
 nnoremap * <Cmd>call keymap#visual_secetion_search('') \| let v:hlsearch = 1 \| let v:searchforward = 1<CR>
-vnoremap <silent> # :<C-u>call keymap#visual_secetion_search(visualmode()) \| let v:hlsearch = 1\| let v:searchforward = 0<CR>
-vnoremap <silent> * :<C-u>call keymap#visual_secetion_search(visualmode()) \| let v:hlsearch = 1\| let v:searchforward = 1<CR>
+xnoremap <silent> # :<C-u>call keymap#visual_secetion_search(visualmode()) \| let v:hlsearch = 1\| let v:searchforward = 0<CR>
+xnoremap <silent> * :<C-u>call keymap#visual_secetion_search(visualmode()) \| let v:hlsearch = 1\| let v:searchforward = 1<CR>
 
 " search in very magic mode
 nnoremap / /\v
 nnoremap ? ?\v
 
 " Search in selected region
-vnoremap / <Esc>/\%V
-vnoremap ? <Esc>?\%V
+xnoremap / <Esc>/\%V
+xnoremap ? <Esc>?\%V
 
 nnoremap <Esc> <Cmd>nohlsearch<CR>
 nnoremap <Esc><Esc> <Cmd>nohlsearch<CR>
@@ -108,7 +110,7 @@ nnoremap <Esc><Esc> <Cmd>nohlsearch<CR>
 " ------------------------------------------------------------------------------
 " Paste to the system clip
 " ------------------------------------------------------------------------------
-" vnoremap <Leader>y "+y
+" xnoremap <Leader>y "+y
 
 " ------------------------------------------------------------------------------
 " Personal compile and run
