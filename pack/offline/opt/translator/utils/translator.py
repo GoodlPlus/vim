@@ -1,9 +1,10 @@
 import argparse
 import hashlib
+import io
 import json
-import os
 import random
 import re
+import sys
 
 import requests
 
@@ -12,6 +13,7 @@ class Translator:
     def __init__(self, args):
         self.args = args
         self.text_preprocess()
+        sys.stdout = io.open(sys.stdout.fileno(), "w", encoding="utf-8")
 
     def text_preprocess(self):
         self.args.text = re.sub(r"\r", r"", self.args.text)
@@ -63,7 +65,7 @@ class BaiduTranslator(Translator):
     def __init__(self, args):
         super(BaiduTranslator, self).__init__(args)
         self.id = "20210205000691244"
-        self.key = "3cNk0RVkWbmmEEXeBft_"
+        self.key = "MTdFYn4lTj3ZFcDmmMMm"
 
     def request(self, url):
         response = requests.get(url)
@@ -159,7 +161,6 @@ def get_translator(args):
 
 
 if __name__ == "__main__":
-    os.environ["LC_ALL"] = "en_US.utf-8"
     args = get_args()
     translator = get_translator(args)(args)
     translator.translate()
