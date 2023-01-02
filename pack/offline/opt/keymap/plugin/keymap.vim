@@ -13,32 +13,38 @@ endif
 " ------------------------------------------------------------------------------
 " Personal tab keymaps
 " ------------------------------------------------------------------------------
-" nnoremap <Tab>H <C-w>H
-" nnoremap <Tab>J <C-w>J
-" nnoremap <Tab>K <C-w>K
-" nnoremap <Tab>L <C-w>L
-"
-" nnoremap <Tab>w <C-w>w
-" nnoremap <Tab>c <C-w>c
-"
-" nnoremap <Tab>s <C-w>s
-" nnoremap <Tab>v <C-w>v
+nnoremap <Tab>h <C-w>h
+nnoremap <Tab>j <C-w>j
+nnoremap <Tab>k <C-w>k
+nnoremap <Tab>l <C-w>l
+nnoremap <Tab>w <C-w>w
+nnoremap <Tab>c <C-w>c
+nnoremap <Tab>+ <C-w>+
+nnoremap <Tab>- <C-w>-
+nnoremap <Tab>, <C-w><
+nnoremap <Tab>. <C-w>>
+nnoremap <Tab>= <C-w>=
+nnoremap <Tab>s <C-w>s
+nnoremap <Tab>v <C-w>v
+nnoremap <Tab>o <C-w>o
+nnoremap <Tab>p <C-w>p
 
-nnoremap <M-,> <C-w><
-nnoremap <M-.> <C-w>>
+nnoremap <Tab>H <C-w>H
+nnoremap <Tab>J <C-w>J
+nnoremap <Tab>K <C-w>K
+nnoremap <Tab>L <C-w>L
 
-noremap <M-h> <C-w>h
-noremap <M-j> <C-w>j
-noremap <M-k> <C-w>k
-noremap <M-l> <C-w>l
+" modify the key value of <C-i>
+noremap <Esc>^i <C-i>
 
-noremap <M-n> <Cmd>bnext<CR>
-noremap <M-p> <Cmd>bprevious<CR>
+nnoremap <Tab> <Nop>
+nnoremap <M-l> <Cmd>bnext<CR>
+nnoremap <M-h> <Cmd>bprevious<CR>
 
-tnoremap <M-h> <C-\><C-n><C-w>h
-tnoremap <M-j> <C-\><C-n><C-w>j
-tnoremap <M-k> <C-\><C-n><C-w>k
-tnoremap <M-l> <C-\><C-n><C-w>l
+tnoremap <Tab>h <C-\><C-n><C-w>h
+tnoremap <Tab>j <C-\><C-n><C-w>j
+tnoremap <Tab>k <C-\><C-n><C-w>k
+tnoremap <Tab>l <C-\><C-n><C-w>l
 
 tnoremap <Esc> <C-\><C-n>
 
