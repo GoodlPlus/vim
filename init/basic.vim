@@ -36,9 +36,10 @@ set ignorecase smartcase
 
 " Set encoding format
 set encoding=utf-8
-" set fileencoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gbk,gb18030,big5,euc-jp,latin1
-" set fileformat=unix
+set fileformat=unix
 set fileformats=unix,dos,mac
 
 " Save undo buffer in undodirectory
