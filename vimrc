@@ -24,6 +24,7 @@ const g:_VIM_CACHE_PATH = fnameescape(join([g:_VIM_PATH, 'cache'], '/'))
 if empty(glob(g:_VIM_CACHE_PATH))
     silent execute '!mkdir -p '.g:_VIM_CACHE_PATH
 endif
+let g:coc_data_home = join([g:_VIM_CACHE_PATH, 'coc'], '/')
 let s:init_name = fnameescape('init')
 let s:init_path = fnameescape(join([g:_VIM_PATH, s:init_name], '/'))
 let s:init_list =
