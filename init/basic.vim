@@ -29,7 +29,7 @@ set termguicolors
 set background=dark
 
 let mapleader=' '
-let maplocalleader = "\<CR>"
+" let maplocalleader = "\<CR>"
 
 " Ignore case when searching
 set ignorecase smartcase
