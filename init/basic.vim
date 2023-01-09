@@ -131,7 +131,7 @@ set pumheight=10
 set complete+=kspell
 
 set hidden
-set shortmess=acs
+set shortmess=atcs
 " autocmd BufEnter * set formatoptions-=cro
 
 set updatetime=500
