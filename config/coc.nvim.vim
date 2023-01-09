@@ -61,7 +61,7 @@ nnoremap gi <Plug>(coc-implementation)
 nnoremap <silent>gr :call CocActionAsync('jumpReference', function('<SID>go_to_reference'))<CR>
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <Leader>k :call <SID>show_documentation()<CR>
 
 function s:show_documentation() abort
     if (index(['vim','help'], &filetype) >= 0)

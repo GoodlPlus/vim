@@ -38,8 +38,6 @@ nnoremap <Tab>L <C-w>L
 noremap <Esc>^i <C-i>
 
 nnoremap <Tab> <Nop>
-nnoremap <M-l> <Cmd>bnext<CR>
-nnoremap <M-h> <Cmd>bprevious<CR>
 
 tnoremap <Tab>h <C-\><C-n><C-w>h
 tnoremap <Tab>j <C-\><C-n><C-w>j
@@ -71,6 +69,12 @@ nnoremap j gj
 nnoremap k gk
 xnoremap j gj
 xnoremap k gk
+nnoremap J <C-d>
+nnoremap K <C-u>
+xnoremap J <C-d>
+xnoremap K <C-u>
+nnoremap H <Cmd>bprevious<CR>
+nnoremap L <Cmd>bnext<CR>
 
 " ------------------------------------------------------------------------------
 " Indent in visual mode
