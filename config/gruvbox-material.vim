@@ -20,5 +20,5 @@ let g:gruvbox_material_disable_terminal_colors = 1
 let g:gruvbox_material_better_performance = 1
 
 let g:Default = {'guifg': '#a89984', 'guibg': '#1d2021'}
-let g:Seletect = {'guifg': '#d4be98', 'guibg': '#3c3836'}
+let g:Seletect = {'guifg': '#d4be98', 'guibg': '#32302f'}
 let g:Fill = {'guifg': 'NONE', 'guibg': 'NONE'}
