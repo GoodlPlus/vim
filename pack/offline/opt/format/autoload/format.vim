@@ -72,6 +72,7 @@ def StartJob(buffer_name: string, cmd: list<any>)
             'exit_cb': ExitCallback,
             'in_io': 'buffer',
             'in_name': buffer_name,
+            'out_mode': 'raw',
         }
     elseif overwrite == 'each'
         callback =
@@ -122,10 +123,11 @@ def CloseCallback(channel: channel)
     var buffer_info = format_info[buffer_name]
     var info = buffer_info[-1]
     if info['status']
-        var formatted_lines: list<string>
-        while ch_status(channel, {'part': 'out'}) == 'buffered'
-            add(formatted_lines, ch_read(channel, {'part': 'out'}))
-        endwhile
+        # var formatted_lines: list<string>
+        # while ch_status(channel, {'part': 'out'}) == 'buffered'
+        #     add(formatted_lines, ch_read(channel, {'part': 'out'}))
+        # endwhile
+        var formatted_lines = split(ch_readraw(channel, {'part': 'out'}), "\n")
         if info['format'] == 'clang-format'
             var header = formatted_lines[0]
             var header_dict = json_decode(header)
