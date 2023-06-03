@@ -19,11 +19,11 @@ let &t_Ce = "\e[4:0m"
 " Enable underline colors (ANSI), see alacritty #4660
 let &t_AU = "\e[58;5;%dm"
 " Enable true color
-let &t_8u = "\e[58;2;%lu;%lu;%lum"
-if &term =~# '^\(tmux\|screen\|st\|alacritty\)'
-    let &t_8f = "\e[38;2;%lu;%lu;%lum"
-    let &t_8b = "\e[48;2;%lu;%lu;%lum"
-endif
+" let &t_8u = "\e[58;2;%lu;%lu;%lum"
+" if &term =~# '^\(tmux\|screen\|st\|alacritty\)'
+"     let &t_8f = "\e[38;2;%lu;%lu;%lum"
+"     let &t_8b = "\e[48;2;%lu;%lu;%lum"
+" endif
 
 set termguicolors
 set background=dark
@@ -69,7 +69,7 @@ set scrolloff=5
 set sidescroll=1
 set sidescrolloff=5
 
-set synmaxcol=256
+set synmaxcol=512
 set regexpengine=1
 
 " Set indent width
