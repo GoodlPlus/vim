@@ -86,4 +86,14 @@ Plugin '{插件github链接}'
 # 添加的插件必须得在该行之前
 call plugin#load_plugin_all()
 ```
-配置完需要加入的plugin信息后，重新进入vim，输入`:InstallPlugin`进行自定义插件安装
+配置完需要加入的plugin信息后，重新进入vim，输入`:InstallPlugin`进行自定义插件安装。此外，除了`InstallPlugin`之外，还支持`:UpdatePlugin`和`:UninstallPlugin`功能，如下介绍所示。
+```
+# 刚下载配置或者新添加插件地址后安装插件
+:InstallPlugin
+
+# 更新插件
+:UpdatePlugin
+
+# 在配置中删除插件地址后卸载插件
+:UninstallPlugin
+```
