@@ -49,6 +49,7 @@ let g:Lf_PreviewResult =
 let g:Lf_HideHelp = 1
 let g:Lf_IgnoreCurrentBufferName = 1
 let g:Lf_PreviewInPopup = 1
+let g:Lf_PopupPreviewPosition = "top"
 " let g:Lf_PreviewHorizontalPosition = 'center'
 " let g:Lf_PreviewPopupWidth = &columns
 " let g:Lf_PopupHeight = 0.2
