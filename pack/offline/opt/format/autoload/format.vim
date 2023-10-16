@@ -38,7 +38,7 @@ def GetBlackFormatCmd(info: dict<any>): list<any>
     [
         'black',
         '-',
-        '--line-length=100',
+        '--line-length=108',
         '--quiet',
     ]
     return cmd
