@@ -1,3 +1,4 @@
 pack/online/opt/*
 cache/*
 .netrwhist
+config/sync.vim
